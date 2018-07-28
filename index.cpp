@@ -212,7 +212,7 @@ void physics_loop(void *arg){
     rect.y = player_t.player_Y;
     
     SDL_SetRenderDrawColor(renderer, 75, 0, 130, 255);
-    SDL_RenderFillRect(renderer, &rect);
+    SDL_RenderFillRect(renderer, &rect);//
 
     SDL_RenderPresent(renderer);
 
