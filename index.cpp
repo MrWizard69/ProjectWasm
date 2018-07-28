@@ -213,6 +213,7 @@ void physics_loop(void *arg){
     
     SDL_SetRenderDrawColor(renderer, 75, 0, 130, 255);
     SDL_RenderFillRect(renderer, &rect);
+    //new comment
 
     SDL_RenderPresent(renderer);
 
