@@ -3,8 +3,12 @@
 #include <cstdlib>
 #include <stdio.h>
 
-#define SCREEN_WIDTH  500
-#define SCREEN_HEIGHT 500
+  //git commands
+  //git init <-- starts looking for new changes. used before you work
+  //git add . <-- grabs all the new stuff
+  //git commit -m "first commit"
+  //git push -u origin master
+  //git push -u origin gh-pages
 
 
 struct context{ // this is for handling the stage and frames
