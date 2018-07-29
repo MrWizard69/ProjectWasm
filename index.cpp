@@ -14,19 +14,33 @@ struct context{ // this is for handling the stage and frames
 
 }context_t;
 
-struct player{ //this is for handling player position and input states
+struct player_Position{ //this is for handling player position and input states
 
     int player_VX;
     int player_VY;
     int player_X;
     int player_Y;
 
-    bool upPressed;
-    bool downPressed;
-    bool leftPressed;
-    bool rightPressed;
+    bool up_pressed;
+    bool down_pressed;
+    bool left_pressed;
+    bool right_pressed;
 
-}player_t;
+}playerPos_t;
+
+struct canvas_dementions{
+
+    double canvas_width;
+    double canvas_height;
+
+}canvasDem_t;
+
+struct player_dementions{
+
+    double player_width;
+    double player_height;
+
+}playerDem_t;
 
 void input_listenter(struct context *ctx){ //This is for listening for the keyboard controls
 
@@ -39,81 +53,81 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
             case SDLK_UP:
                 if (event.key.type == SDL_KEYDOWN){
 
-                    player_t.upPressed = true;
+                    playerPos_t.up_pressed = true;
                 }
                 else if (event.key.type == SDL_KEYUP){
 
-                    player_t.upPressed = false;
+                    playerPos_t.up_pressed = false;
                 }
                 break;
             case SDLK_DOWN:
                 if (event.key.type == SDL_KEYDOWN){
 
-                    player_t.downPressed = true;
+                    playerPos_t.down_pressed = true;
                 }
                 else if (event.key.type == SDL_KEYUP){
 
-                    player_t.downPressed = false;
+                    playerPos_t.down_pressed = false;
                 }
                 break;
             case SDLK_LEFT:
                 if (event.key.type == SDL_KEYDOWN){
 
-                    player_t.leftPressed = true;
+                    playerPos_t.left_pressed = true;
                 }
                 else if (event.key.type == SDL_KEYUP){
 
-                    player_t.leftPressed = false;
+                    playerPos_t.left_pressed = false;
                 }
                 break;
             case SDLK_RIGHT:
                 if (event.key.type == SDL_KEYDOWN){
 
-                    player_t.rightPressed = true;
+                    playerPos_t.right_pressed = true;
                 }
                 else if (event.key.type == SDL_KEYUP){
 
-                    player_t.rightPressed = false;
+                    playerPos_t.right_pressed = false;
                 }
                 break;
             case SDLK_w:
                 if (event.key.type == SDL_KEYDOWN){
 
-                    player_t.upPressed = true;
+                    playerPos_t.up_pressed = true;
                 }
                 else if (event.key.type == SDL_KEYUP){
 
-                    player_t.upPressed = false;
+                    playerPos_t.up_pressed = false;
                 }
                 break;
             case SDLK_s:
                 if (event.key.type == SDL_KEYDOWN){
 
-                    player_t.downPressed = true;
+                    playerPos_t.down_pressed = true;
                 }
                 else if (event.key.type == SDL_KEYUP){
 
-                    player_t.downPressed = false;
+                    playerPos_t.down_pressed = false;
                 }
                 break;
             case SDLK_a:
                 if (event.key.type == SDL_KEYDOWN){
 
-                    player_t.leftPressed = true;
+                    playerPos_t.left_pressed = true;
                 }
                 else if (event.key.type == SDL_KEYUP){
 
-                    player_t.leftPressed = false;
+                    playerPos_t.left_pressed = false;
                 }
                 break;
             case SDLK_d:
                 if (event.key.type == SDL_KEYDOWN){
 
-                    player_t.rightPressed = true;
+                    playerPos_t.right_pressed = true;
                 }
                 else if (event.key.type == SDL_KEYUP){
 
-                    player_t.rightPressed = false;
+                    playerPos_t.right_pressed = false;
                 }
                 break;
             default:
@@ -122,69 +136,69 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
 
     }
     // These are for diagonal movement
-    if(player_t.upPressed == true && 
-        player_t.leftPressed == true){
+    if(playerPos_t.up_pressed == true && 
+        playerPos_t.left_pressed == true){
 
-            player_t.player_VY = -2;
-            player_t.player_VX = -2;
+            playerPos_t.player_VY = -2;
+            playerPos_t.player_VX = -2;
     }
-    if(player_t.upPressed == true && 
-        player_t.rightPressed == true){
+    if(playerPos_t.up_pressed == true && 
+        playerPos_t.right_pressed == true){
 
-            player_t.player_VY = -2;
-            player_t.player_VX = 2;
+            playerPos_t.player_VY = -2;
+            playerPos_t.player_VX = 2;
     }
-    if(player_t.downPressed == true && 
-        player_t.leftPressed == true){
+    if(playerPos_t.down_pressed == true && 
+        playerPos_t.left_pressed == true){
 
-            player_t.player_VY = 2;
-            player_t.player_VX = -2;
+            playerPos_t.player_VY = 2;
+            playerPos_t.player_VX = -2;
     }
-    if(player_t.downPressed == true && 
-        player_t.rightPressed == true){
+    if(playerPos_t.down_pressed == true && 
+        playerPos_t.right_pressed == true){
 
-            player_t.player_VY = 2;
-            player_t.player_VX = 2;
+            playerPos_t.player_VY = 2;
+            playerPos_t.player_VX = 2;
     }
 
     // These are for straight movement
-    if(player_t.upPressed == true && 
-        player_t.leftPressed == false &&
-        player_t.rightPressed == false){
+    if(playerPos_t.up_pressed == true && 
+        playerPos_t.left_pressed == false &&
+        playerPos_t.right_pressed == false){
 
-        player_t.player_VY = -2;
-        player_t.player_VX = 0;
+        playerPos_t.player_VY = -2;
+        playerPos_t.player_VX = 0;
     }
-    if(player_t.downPressed == true && 
-        player_t.leftPressed == false &&
-        player_t.rightPressed == false){
+    if(playerPos_t.down_pressed == true && 
+        playerPos_t.left_pressed == false &&
+        playerPos_t.right_pressed == false){
 
-        player_t.player_VY = 2;
-        player_t.player_VX = 0;
+        playerPos_t.player_VY = 2;
+        playerPos_t.player_VX = 0;
     }
-    if(player_t.leftPressed == true && 
-        player_t.upPressed == false &&
-        player_t.downPressed == false){
+    if(playerPos_t.left_pressed == true && 
+        playerPos_t.up_pressed == false &&
+        playerPos_t.down_pressed == false){
 
-        player_t.player_VX = -2;
-        player_t.player_VY = 0;
+        playerPos_t.player_VX = -2;
+        playerPos_t.player_VY = 0;
     }
-    if(player_t.rightPressed == true && 
-        player_t.upPressed == false &&
-        player_t.downPressed == false){
+    if(playerPos_t.right_pressed == true && 
+        playerPos_t.up_pressed == false &&
+        playerPos_t.down_pressed == false){
 
-        player_t.player_VX = 2;
-        player_t.player_VY = 0;
+        playerPos_t.player_VX = 2;
+        playerPos_t.player_VY = 0;
     }
 
     //This is when no movement keys are pressed
-    if(player_t.upPressed == false && 
-       player_t.downPressed == false &&
-       player_t.leftPressed == false &&
-       player_t.rightPressed == false){
+    if(playerPos_t.up_pressed == false && 
+       playerPos_t.down_pressed == false &&
+       playerPos_t.left_pressed == false &&
+       playerPos_t.right_pressed == false){
 
-        player_t.player_VX = 0;
-        player_t.player_VY = 0;
+        playerPos_t.player_VX = 0;
+        playerPos_t.player_VY = 0;
     }
 }
 
@@ -195,8 +209,8 @@ void physics_loop(void *arg){
     
     input_listenter(ctx); //get the keypresses
 
-    player_t.player_X += player_t.player_VX;
-    player_t.player_Y += player_t.player_VY;
+    playerPos_t.player_X += playerPos_t.player_VX;
+    playerPos_t.player_Y += playerPos_t.player_VY;
 
     //printf("Project Goes Blep Blep!\n");
     
@@ -206,35 +220,71 @@ void physics_loop(void *arg){
     
     // purple player
     SDL_Rect rect;
-    rect.w = 25;
-    rect.h = 25;
-    rect.x = player_t.player_X;
-    rect.y = player_t.player_Y;
+    rect.w = playerDem_t.player_width;
+    rect.h = playerDem_t.player_height;
+    rect.x = playerPos_t.player_X;
+    rect.y = playerPos_t.player_Y;
     
     SDL_SetRenderDrawColor(renderer, 75, 0, 130, 255);
     SDL_RenderFillRect(renderer, &rect);
-    //new comment
 
     SDL_RenderPresent(renderer);
 
     ctx->iteration++;
 }
 
+double get_game_width = EM_ASM_DOUBLE({
+
+    var canvasWidth = (window.innerWidth) * .72;
+    return canvasWidth;
+
+});
+
+double get_game_height = EM_ASM_DOUBLE({
+
+    var canvasHeight = (window.innerHeight) * .80;
+    return canvasHeight;
+
+});
+
+double get_player_width = EM_ASM_DOUBLE({
+
+    var canvas = (window.innerWidth) * .72;
+    var playerWidth = canvas * .017;
+    return playerWidth;
+
+});
+
+double get_player_height = EM_ASM_DOUBLE({
+
+    var canvas = (window.innerHeight) * .80;
+    var playerHeight = canvas * .03;
+    return playerHeight;
+
+});
+
 int main(){
+
+    canvasDem_t.canvas_width = get_game_width;
+    canvasDem_t.canvas_height = get_game_height;
+
+    playerDem_t.player_width = get_player_width;
+    playerDem_t.player_height = get_player_height;
+    //printf("%f\n", get_player_width);
 
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window *window;
     SDL_Renderer *renderer;
-    SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
+    SDL_CreateWindowAndRenderer(canvasDem_t.canvas_width, canvasDem_t.canvas_height, 0, &window, &renderer);
 
     context ctx;
     ctx.renderer = renderer;
     ctx.iteration = 0;
 
-    player_t.player_VX = 0;
-    player_t.player_VY = 0;
-    player_t.player_X = 50;
-    player_t.player_Y = 50;
+    playerPos_t.player_VX = 0;
+    playerPos_t.player_VY = 0;
+    playerPos_t.player_X = 50;
+    playerPos_t.player_Y = 50;
 
     const int loop = 1; // <- call the function as fast as the browser can (typically 60fps)
     const int fps = -1; // <- call the function as fast as the browser can (typically 60fps)
