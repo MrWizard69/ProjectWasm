@@ -34,15 +34,15 @@ struct player_Position{ //this is for handling player position and input states
 
 struct canvas_dementions{
 
-    double canvas_width;
-    double canvas_height;
+    int canvas_width;
+    int canvas_height;
 
 }canvasDem_t;
 
 struct player_dementions{
 
-    double player_width;
-    double player_height;
+    int player_width;
+    int player_height;
 
 }playerDem_t;
 
@@ -206,6 +206,34 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
     }
 }
 
+void resize_game(int width, int height){ //use emscripten_set_main_loop_arg for better performance
+
+    if(width != canvasDem_t.canvas_width){
+
+        canvasDem_t.canvas_width = width;
+        playerDem_t.player_width = width * .03;
+
+        SDL_Window *window;
+        SDL_Renderer *renderer;
+        SDL_CreateWindowAndRenderer(canvasDem_t.canvas_width, canvasDem_t.canvas_height, 0, &window, &renderer);
+        SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255);
+        SDL_RenderClear(renderer);
+    }
+
+    if(height != canvasDem_t.canvas_height){
+
+        canvasDem_t.canvas_height = height;
+        playerDem_t.player_height = height * .03;
+
+        SDL_Window *window;
+        SDL_Renderer *renderer;
+        SDL_CreateWindowAndRenderer(canvasDem_t.canvas_width, canvasDem_t.canvas_height, 0, &window, &renderer);
+        SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255);
+        SDL_RenderClear(renderer);
+    }
+
+}
+
 void physics_loop(void *arg){
 
     context *ctx = static_cast<context*>(arg);
@@ -217,6 +245,24 @@ void physics_loop(void *arg){
     playerPos_t.player_Y += playerPos_t.player_VY;
 
     //printf("Project Goes Blep Blep!\n");
+
+    int get_new_canvas_width = EM_ASM_DOUBLE({
+
+        var canvasWidth = (window.innerWidth) * .72;
+        return canvasWidth;
+
+    });
+
+    int get_new_canvas_height = EM_ASM_DOUBLE({
+
+        var canvasHeight = (window.innerHeight) * .80;
+        return canvasHeight;
+
+    });
+
+    resize_game(get_new_canvas_width, get_new_canvas_height);
+
+    //printf("%d\n", get_new_canvas_width);
     
     // grey background
     SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255);
@@ -237,29 +283,29 @@ void physics_loop(void *arg){
     ctx->iteration++;
 }
 
-double get_game_width = EM_ASM_DOUBLE({
+int get_game_width = EM_ASM_DOUBLE({
 
     var canvasWidth = (window.innerWidth) * .72;
     return canvasWidth;
 
 });
 
-double get_game_height = EM_ASM_DOUBLE({
+int get_game_height = EM_ASM_DOUBLE({
 
     var canvasHeight = (window.innerHeight) * .80;
     return canvasHeight;
 
 });
 
-double get_player_width = EM_ASM_DOUBLE({
+int get_player_width = EM_ASM_DOUBLE({
 
     var canvas = (window.innerWidth) * .72;
-    var playerWidth = canvas * .017;
+    var playerWidth = canvas * .03;
     return playerWidth;
 
 });
 
-double get_player_height = EM_ASM_DOUBLE({
+int get_player_height = EM_ASM_DOUBLE({
 
     var canvas = (window.innerHeight) * .80;
     var playerHeight = canvas * .03;
@@ -274,11 +320,13 @@ int main(){
 
     playerDem_t.player_width = get_player_width;
     playerDem_t.player_height = get_player_height;
-    //printf("%f\n", get_player_width);
+    //printf("%f\n", get_player_width); //for console logging floats and doubles
+    //printf("%d\n", get_player_width); //for console logging ints
 
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window *window;
     SDL_Renderer *renderer;
+
     SDL_CreateWindowAndRenderer(canvasDem_t.canvas_width, canvasDem_t.canvas_height, 0, &window, &renderer);
 
     context ctx;
