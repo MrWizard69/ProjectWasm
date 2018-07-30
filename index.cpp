@@ -3,12 +3,12 @@
 #include <cstdlib>
 #include <stdio.h>
 
-  //git commands
-  //git init <-- starts looking for new changes. used before you work
-  //git add . <-- grabs all the new stuff
-  //git commit -m "first commit"
-  //git push -u origin master
-  //git push -u origin gh-pages
+//git commands
+//git init <-- starts looking for new changes. used before you work
+//git add . <-- grabs all the new stuff
+//git commit -m "first commit"
+//git push -u origin master
+//git push -u origin gh-pages
 
 
 struct context{ // this is for handling the stage and frames
@@ -206,13 +206,32 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
     }
 }
 
-void resize_game(int width, int height){ //use emscripten_set_main_loop_arg for better performance
+void resize_game(int width, int height){ //void *args  //int width, int height //use emscripten_set_main_loop_arg for better performance
+
+    // int canvas_width = EM_ASM_DOUBLE({
+
+    //     var canvasWidth = (window.innerWidth) * .72;
+    //     return canvasWidth;
+
+    // });
+
+    // if(canvas_width != canvasDem_t.canvas_width){
+
+    //     canvasDem_t.canvas_width = canvas_width;
+    //     playerDem_t.player_width = canvas_width * .03;
+        
+    //     SDL_Window *window;
+    //     SDL_Renderer *renderer;
+    //     SDL_CreateWindowAndRenderer(canvasDem_t.canvas_width, canvasDem_t.canvas_height, 0, &window, &renderer);
+    //     SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255);
+    //     SDL_RenderClear(renderer);
+    // }
 
     if(width != canvasDem_t.canvas_width){
 
         canvasDem_t.canvas_width = width;
         playerDem_t.player_width = width * .03;
-
+        
         SDL_Window *window;
         SDL_Renderer *renderer;
         SDL_CreateWindowAndRenderer(canvasDem_t.canvas_width, canvasDem_t.canvas_height, 0, &window, &renderer);
@@ -224,7 +243,7 @@ void resize_game(int width, int height){ //use emscripten_set_main_loop_arg for 
 
         canvasDem_t.canvas_height = height;
         playerDem_t.player_height = height * .03;
-
+    
         SDL_Window *window;
         SDL_Renderer *renderer;
         SDL_CreateWindowAndRenderer(canvasDem_t.canvas_width, canvasDem_t.canvas_height, 0, &window, &renderer);
@@ -259,6 +278,16 @@ void physics_loop(void *arg){
         return canvasHeight;
 
     });
+
+    // if(get_new_canvas_width != canvasDem_t.canvas_width){
+
+    //     emscripten_push_main_loop_blocker(resize_game, &ctx);
+    //     const int loop = 1; // <- call the function as fast as the browser can (typically 60fps)
+    //     const int fps = -1; // <- call the function as fast as the browser can (typically 60fps)
+    //     //emscripten_set_main_loop_arg(physics_loop, &ctx, fps, loop);
+    // }
+
+    
 
     resize_game(get_new_canvas_width, get_new_canvas_height);
 
