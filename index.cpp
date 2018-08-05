@@ -1,5 +1,7 @@
 #include <SDL2/SDL.h>
 #include <emscripten.h>
+//#include <GL/gl.h>
+//#include <GL/glu.h>
 #include <cstdlib>
 #include <stdio.h>
 
@@ -10,6 +12,9 @@
 //git push -u origin master
 //git push -u origin gh-pages
 
+SDL_Window *window;
+SDL_Renderer *renderer;
+Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
 
 struct context{ // this is for handling the stage and frames
 
@@ -50,7 +55,7 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
 
     SDL_Event event;
 
-    while (SDL_PollEvent(&event)) { //movement issue is in the else if key up in each case statement
+    while (SDL_PollEvent(&event)) {
 
         switch (event.key.keysym.sym){
 
@@ -206,49 +211,47 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
     }
 }
 
-void resize_game(int width, int height){ //void *args  //int width, int height //use emscripten_set_main_loop_arg for better performance
+void rebuild_window(){
 
-    // int canvas_width = EM_ASM_DOUBLE({
-
-    //     var canvasWidth = (window.innerWidth) * .72;
-    //     return canvasWidth;
-
-    // });
-
-    // if(canvas_width != canvasDem_t.canvas_width){
-
-    //     canvasDem_t.canvas_width = canvas_width;
-    //     playerDem_t.player_width = canvas_width * .03;
+    SDL_Rect viewPort;
+    viewPort.w = canvasDem_t.canvas_width;
+    viewPort.h = canvasDem_t.canvas_height;
+    viewPort.x = 0;
+    viewPort.y = 0;
         
-    //     SDL_Window *window;
-    //     SDL_Renderer *renderer;
-    //     SDL_CreateWindowAndRenderer(canvasDem_t.canvas_width, canvasDem_t.canvas_height, 0, &window, &renderer);
-    //     SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255);
-    //     SDL_RenderClear(renderer);
-    // }
+
+    SDL_DestroyWindow(window);
+
+    window = SDL_CreateWindow(
+        "Project Wasm",                    // window title
+        SDL_WINDOWPOS_UNDEFINED,           // initial x position
+        SDL_WINDOWPOS_UNDEFINED,           // initial y position
+        canvasDem_t.canvas_width,          // width, in pixels
+        canvasDem_t.canvas_height,         // height, in pixels
+        flags                              //flags, 0
+    );
+    SDL_GetWindowSurface(window);
+    SDL_RenderSetViewport(renderer, &viewPort);
+}
+
+void resize_game(int width, int height){
 
     if(width != canvasDem_t.canvas_width){
 
         canvasDem_t.canvas_width = width;
-        playerDem_t.player_width = width * .03;
+        //playerDem_t.player_width = width * .03;
+
+        SDL_GetWindowSize(window, &width, &height);
+
+        rebuild_window();
         
-        SDL_Window *window;
-        SDL_Renderer *renderer;
-        SDL_CreateWindowAndRenderer(canvasDem_t.canvas_width, canvasDem_t.canvas_height, 0, &window, &renderer);
-        SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255);
-        SDL_RenderClear(renderer);
     }
 
     if(height != canvasDem_t.canvas_height){
 
         canvasDem_t.canvas_height = height;
-        playerDem_t.player_height = height * .03;
-    
-        SDL_Window *window;
-        SDL_Renderer *renderer;
-        SDL_CreateWindowAndRenderer(canvasDem_t.canvas_width, canvasDem_t.canvas_height, 0, &window, &renderer);
-        SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255);
-        SDL_RenderClear(renderer);
+        //playerDem_t.player_height = height * .03;
+        rebuild_window();
     }
 
 }
@@ -257,7 +260,7 @@ void physics_loop(void *arg){
 
     context *ctx = static_cast<context*>(arg);
     SDL_Renderer *renderer = ctx->renderer;
-    
+
     input_listenter(ctx); //get the keypresses
 
     playerPos_t.player_X += playerPos_t.player_VX;
@@ -278,16 +281,6 @@ void physics_loop(void *arg){
         return canvasHeight;
 
     });
-
-    // if(get_new_canvas_width != canvasDem_t.canvas_width){
-
-    //     emscripten_push_main_loop_blocker(resize_game, &ctx);
-    //     const int loop = 1; // <- call the function as fast as the browser can (typically 60fps)
-    //     const int fps = -1; // <- call the function as fast as the browser can (typically 60fps)
-    //     //emscripten_set_main_loop_arg(physics_loop, &ctx, fps, loop);
-    // }
-
-    
 
     resize_game(get_new_canvas_width, get_new_canvas_height);
 
@@ -353,10 +346,21 @@ int main(){
     //printf("%d\n", get_player_width); //for console logging ints
 
     SDL_Init(SDL_INIT_VIDEO);
-    SDL_Window *window;
-    SDL_Renderer *renderer;
+    
+    // Create an application window with the following settings:
+    window = SDL_CreateWindow(
+        "Project Wasm",                    // window title
+        SDL_WINDOWPOS_UNDEFINED,           // initial x position
+        SDL_WINDOWPOS_UNDEFINED,           // initial y position
+        canvasDem_t.canvas_width,          // width, in pixels
+        canvasDem_t.canvas_height,         // height, in pixels
+        flags                              //flags, 0
+    );
 
-    SDL_CreateWindowAndRenderer(canvasDem_t.canvas_width, canvasDem_t.canvas_height, 0, &window, &renderer);
+    renderer = SDL_CreateRenderer(window, -1, 0);
+
+    //printf("%d\n", windowID);
+    
 
     context ctx;
     ctx.renderer = renderer;
@@ -370,6 +374,7 @@ int main(){
     const int loop = 1; // <- call the function as fast as the browser can (typically 60fps)
     const int fps = -1; // <- call the function as fast as the browser can (typically 60fps)
     emscripten_set_main_loop_arg(physics_loop, &ctx, fps, loop);
+
     
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
