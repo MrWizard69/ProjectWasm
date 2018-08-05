@@ -336,7 +336,7 @@ int get_player_height = EM_ASM_INT({
 });
 
 int main(){
-
+    
     canvasDem_t.canvas_width = get_game_width;
     canvasDem_t.canvas_height = get_game_height;
 
@@ -365,8 +365,8 @@ int main(){
 
     playerPos_t.player_VX = 0;
     playerPos_t.player_VY = 0;
-    playerPos_t.player_X = 50;
-    playerPos_t.player_Y = 50;
+    playerPos_t.player_X = (canvasDem_t.canvas_width) * .50;
+    playerPos_t.player_Y = (canvasDem_t.canvas_height) * .50;
 
     const int loop = 1; // <- call the function as fast as the browser can (typically 60fps)
     const int fps = -1; // <- call the function as fast as the browser can (typically 60fps)
