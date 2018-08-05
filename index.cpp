@@ -236,10 +236,11 @@ void rebuild_window(){
 
 void resize_game(int width, int height){
 
-    if(width != canvasDem_t.canvas_width){
+    if(width != canvasDem_t.canvas_width && width != NULL){
 
         canvasDem_t.canvas_width = width;
-        //playerDem_t.player_width = width * .03;
+        playerDem_t.player_width = width * .03;
+        playerDem_t.player_height = width * .03;
 
         SDL_GetWindowSize(window, &width, &height);
 
@@ -247,10 +248,9 @@ void resize_game(int width, int height){
         
     }
 
-    if(height != canvasDem_t.canvas_height){
+    if(height != canvasDem_t.canvas_height && height != NULL){
 
         canvasDem_t.canvas_height = height;
-        //playerDem_t.player_height = height * .03;
         rebuild_window();
     }
 
@@ -268,14 +268,14 @@ void physics_loop(void *arg){
 
     //printf("Project Goes Blep Blep!\n");
 
-    int get_new_canvas_width = EM_ASM_DOUBLE({
+    int get_new_canvas_width = EM_ASM_INT({
 
         var canvasWidth = (window.innerWidth) * .72;
         return canvasWidth;
 
     });
 
-    int get_new_canvas_height = EM_ASM_DOUBLE({
+    int get_new_canvas_height = EM_ASM_INT({
 
         var canvasHeight = (window.innerHeight) * .80;
         return canvasHeight;
@@ -305,21 +305,21 @@ void physics_loop(void *arg){
     ctx->iteration++;
 }
 
-int get_game_width = EM_ASM_DOUBLE({
+int get_game_width = EM_ASM_INT({
 
     var canvasWidth = (window.innerWidth) * .72;
     return canvasWidth;
 
 });
 
-int get_game_height = EM_ASM_DOUBLE({
+int get_game_height = EM_ASM_INT({
 
     var canvasHeight = (window.innerHeight) * .80;
     return canvasHeight;
 
 });
 
-int get_player_width = EM_ASM_DOUBLE({
+int get_player_width = EM_ASM_INT({
 
     var canvas = (window.innerWidth) * .72;
     var playerWidth = canvas * .03;
@@ -327,9 +327,9 @@ int get_player_width = EM_ASM_DOUBLE({
 
 });
 
-int get_player_height = EM_ASM_DOUBLE({
+int get_player_height = EM_ASM_INT({
 
-    var canvas = (window.innerHeight) * .80;
+    var canvas = (window.innerWidth) * .72;
     var playerHeight = canvas * .03;
     return playerHeight;
 
@@ -358,9 +358,6 @@ int main(){
     );
 
     renderer = SDL_CreateRenderer(window, -1, 0);
-
-    //printf("%d\n", windowID);
-    
 
     context ctx;
     ctx.renderer = renderer;

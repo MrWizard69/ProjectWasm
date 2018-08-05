@@ -14,10 +14,10 @@
 
 <body>
 
-    <!-- Create the canvas that the C++ code will draw into -->
+    <!-- Create the canvas that C++ will draw into -->
     <canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
 
-    <!-- Allow the C++ to access the canvas element --> 
+    <!-- Allow C++ to access the canvas element --> 
     <script type='text/javascript'>
         var Module = {
             canvas: (function() { return document.getElementById('canvas'); })()
