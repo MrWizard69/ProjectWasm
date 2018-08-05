@@ -211,16 +211,7 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
     }
 }
 
-void rebuild_window(){
-
-    SDL_Rect viewPort;
-    viewPort.w = canvasDem_t.canvas_width;
-    viewPort.h = canvasDem_t.canvas_height;
-    viewPort.x = 0;
-    viewPort.y = 0;
-        
-
-    SDL_DestroyWindow(window);
+void create_window(){ //this is used to create the window
 
     window = SDL_CreateWindow(
         "Project Wasm",                    // window title
@@ -230,11 +221,24 @@ void rebuild_window(){
         canvasDem_t.canvas_height,         // height, in pixels
         flags                              //flags, 0
     );
+}
+
+void rebuild_window(){ //this will rebuild the window and apply the new viewport
+
+    SDL_Rect viewPort;
+    viewPort.w = canvasDem_t.canvas_width;
+    viewPort.h = canvasDem_t.canvas_height;
+    viewPort.x = 0;
+    viewPort.y = 0;
+        
+
+    SDL_DestroyWindow(window);
+    create_window();
     SDL_GetWindowSurface(window);
     SDL_RenderSetViewport(renderer, &viewPort);
 }
 
-void resize_game(int width, int height){
+void resize_game(int width, int height){ //this will listen for screen size changes and apply new dementions
 
     if(width != canvasDem_t.canvas_width && width != NULL){
 
@@ -242,7 +246,7 @@ void resize_game(int width, int height){
         playerDem_t.player_width = width * .03;
         playerDem_t.player_height = width * .03;
 
-        SDL_GetWindowSize(window, &width, &height);
+        SDL_GetWindowSize(window, &width, &height); //this will get the new screen size before rebuilding
 
         rebuild_window();
         
@@ -256,7 +260,7 @@ void resize_game(int width, int height){
 
 }
 
-void physics_loop(void *arg){
+void physics_loop(void *arg){ //this is the main loop
 
     context *ctx = static_cast<context*>(arg);
     SDL_Renderer *renderer = ctx->renderer;
@@ -347,15 +351,7 @@ int main(){
 
     SDL_Init(SDL_INIT_VIDEO);
     
-    // Create an application window with the following settings:
-    window = SDL_CreateWindow(
-        "Project Wasm",                    // window title
-        SDL_WINDOWPOS_UNDEFINED,           // initial x position
-        SDL_WINDOWPOS_UNDEFINED,           // initial y position
-        canvasDem_t.canvas_width,          // width, in pixels
-        canvasDem_t.canvas_height,         // height, in pixels
-        flags                              //flags, 0
-    );
+    create_window();
 
     renderer = SDL_CreateRenderer(window, -1, 0);
 
