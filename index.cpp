@@ -1,9 +1,8 @@
 #include <SDL2/SDL.h>
 #include <emscripten.h>
-//#include <GL/gl.h>
-//#include <GL/glu.h>
 #include <cstdlib>
 #include <stdio.h>
+#include <math.h>
 
 //git commands
 //git init <-- starts looking for new changes. used before you work
@@ -142,6 +141,14 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
             default:
                 break;
         }
+        // switch(event.type){
+
+        //     case SDL_QUIT:
+        //         SDL_DestroyRenderer(renderer);
+        //         SDL_DestroyWindow(window);
+        //         SDL_Quit();
+        //     break;
+        // }
 
     }
     // These are for diagonal movement
@@ -234,25 +241,32 @@ void rebuild_window(){ //this will rebuild the window and apply the new viewport
 
     SDL_DestroyWindow(window);
     create_window();
-    SDL_GetWindowSurface(window);
     SDL_RenderSetViewport(renderer, &viewPort);
 }
 
 void resize_game(int width, int height){ //this will listen for screen size changes and apply new dementions
 
-    if(width != canvasDem_t.canvas_width && width != NULL){
-
+    if(width > canvasDem_t.canvas_width || width < canvasDem_t.canvas_width){ // breaks at canvas width 640; height 573
+                                                                             // keep an eye out. appears to be fixed
+        // int variation = (canvasDem_t.canvas_width - width) / 100;
+        // //variation = variation * .10;
+        // if(variation < 0){
+        //     variation = variation * -1;
+        // }
+            
         canvasDem_t.canvas_width = width;
-        playerDem_t.player_width = width * .03;
-        playerDem_t.player_height = width * .03;
-
-        SDL_GetWindowSize(window, &width, &height); //this will get the new screen size before rebuilding
+        playerDem_t.player_width = (int)width * .03;
+        playerDem_t.player_height = (int)width * .03;
+        //printf("%d\n", playerDem_t.player_height);
+        // if(variation != 0){
+        //     playerPos_t.player_X = playerPos_t.player_X * (variation * .100); //this needs work future Jordan!
+        // }
 
         rebuild_window();
         
     }
 
-    if(height != canvasDem_t.canvas_height && height != NULL){
+    if(height > canvasDem_t.canvas_height || height < canvasDem_t.canvas_height){
 
         canvasDem_t.canvas_height = height;
         rebuild_window();
