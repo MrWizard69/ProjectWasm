@@ -141,14 +141,6 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
             default:
                 break;
         }
-        // switch(event.type){
-
-        //     case SDL_QUIT:
-        //         SDL_DestroyRenderer(renderer);
-        //         SDL_DestroyWindow(window);
-        //         SDL_Quit();
-        //     break;
-        // }
 
     }
     // These are for diagonal movement
@@ -248,19 +240,15 @@ void resize_game(int width, int height){ //this will listen for screen size chan
 
     if(width > canvasDem_t.canvas_width || width < canvasDem_t.canvas_width){ // breaks at canvas width 640; height 573
                                                                              // keep an eye out. appears to be fixed
-        // int variation = (canvasDem_t.canvas_width - width) / 100;
-        // //variation = variation * .10;
-        // if(variation < 0){
-        //     variation = variation * -1;
-        // }
+        double width_variation;
+
+        width_variation =  round(10 * ((double)playerPos_t.player_X / canvasDem_t.canvas_width)) / 10;
             
         canvasDem_t.canvas_width = width;
         playerDem_t.player_width = (int)width * .03;
         playerDem_t.player_height = (int)width * .03;
-        //printf("%d\n", playerDem_t.player_height);
-        // if(variation != 0){
-        //     playerPos_t.player_X = playerPos_t.player_X * (variation * .100); //this needs work future Jordan!
-        // }
+
+        playerPos_t.player_X = width * width_variation;
 
         rebuild_window();
         
@@ -268,7 +256,14 @@ void resize_game(int width, int height){ //this will listen for screen size chan
 
     if(height > canvasDem_t.canvas_height || height < canvasDem_t.canvas_height){
 
+        double height_variation;
+
+        height_variation =  round(10 * ((double)playerPos_t.player_Y / canvasDem_t.canvas_height)) / 10;
+
         canvasDem_t.canvas_height = height;
+
+        playerPos_t.player_Y = height * height_variation;
+
         rebuild_window();
     }
 
