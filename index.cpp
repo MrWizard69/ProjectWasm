@@ -147,26 +147,26 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
     if(playerPos_t.up_pressed == true && 
         playerPos_t.left_pressed == true){
 
-            playerPos_t.player_VY = -2;
-            playerPos_t.player_VX = -2;
+            playerPos_t.player_VY = (int)(canvasDem_t.canvas_height * .005) * -1;
+            playerPos_t.player_VX = (int)(canvasDem_t.canvas_width * .005) * -1;
     }
     if(playerPos_t.up_pressed == true && 
         playerPos_t.right_pressed == true){
 
-            playerPos_t.player_VY = -2;
-            playerPos_t.player_VX = 2;
+            playerPos_t.player_VY = (int)(canvasDem_t.canvas_height * .005) * -1;
+            playerPos_t.player_VX = (int)(canvasDem_t.canvas_width * .005);
     }
     if(playerPos_t.down_pressed == true && 
         playerPos_t.left_pressed == true){
 
-            playerPos_t.player_VY = 2;
-            playerPos_t.player_VX = -2;
+            playerPos_t.player_VY = (int)(canvasDem_t.canvas_height * .005);
+            playerPos_t.player_VX = (int)(canvasDem_t.canvas_width * .005) * -1;
     }
     if(playerPos_t.down_pressed == true && 
         playerPos_t.right_pressed == true){
 
-            playerPos_t.player_VY = 2;
-            playerPos_t.player_VX = 2;
+            playerPos_t.player_VY = (int)(canvasDem_t.canvas_height * .005);
+            playerPos_t.player_VX = (int)(canvasDem_t.canvas_width * .005);
     }
 
     // These are for straight movement
@@ -174,28 +174,28 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
         playerPos_t.left_pressed == false &&
         playerPos_t.right_pressed == false){
 
-        playerPos_t.player_VY = -2;
+        playerPos_t.player_VY = (int)(canvasDem_t.canvas_height * .005) * -1;
         playerPos_t.player_VX = 0;
     }
     if(playerPos_t.down_pressed == true && 
         playerPos_t.left_pressed == false &&
         playerPos_t.right_pressed == false){
 
-        playerPos_t.player_VY = 2;
+        playerPos_t.player_VY = (int)(canvasDem_t.canvas_height * .005);
         playerPos_t.player_VX = 0;
     }
     if(playerPos_t.left_pressed == true && 
         playerPos_t.up_pressed == false &&
         playerPos_t.down_pressed == false){
 
-        playerPos_t.player_VX = -2;
+        playerPos_t.player_VX = (int)(canvasDem_t.canvas_width * .005) * -1;
         playerPos_t.player_VY = 0;
     }
     if(playerPos_t.right_pressed == true && 
         playerPos_t.up_pressed == false &&
         playerPos_t.down_pressed == false){
 
-        playerPos_t.player_VX = 2;
+        playerPos_t.player_VX = (int)(canvasDem_t.canvas_width * .005);
         playerPos_t.player_VY = 0;
     }
 
