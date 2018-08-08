@@ -14,6 +14,7 @@
 SDL_Window *window;
 SDL_Renderer *renderer;
 Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
+SDL_DisplayMode dm;
 
 struct context{ // this is for handling the stage and frames
 
@@ -41,6 +42,9 @@ struct canvas_dementions{
 
     int canvas_width;
     int canvas_height;
+
+    int new_canvas_width;
+    int new_canvas_height;
 
 }canvasDem_t;
 
@@ -296,9 +300,17 @@ void physics_loop(void *arg){ //this is the main loop
 
     });
 
-    resize_game(get_new_canvas_width, get_new_canvas_height);
+    // SDL_GetCurrentDisplayMode(0, &dm);
 
-    //printf("%d\n", get_new_canvas_width);
+    // canvasDem_t.new_canvas_width = (int)(dm.w * 0.72);
+    // canvasDem_t.new_canvas_height = (int)(dm.h * 0.80);
+
+
+    resize_game(get_new_canvas_width, get_new_canvas_height);
+    //resize_game(canvasDem_t.new_canvas_width, canvasDem_t.new_canvas_height);
+
+    //printf("%d\n", canvasDem_t.new_canvas_width);
+    //printf("%d\n", canvasDem_t.new_canvas_height);
     
     // grey background
     SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255);
@@ -319,47 +331,20 @@ void physics_loop(void *arg){ //this is the main loop
     ctx->iteration++;
 }
 
-int get_game_width = EM_ASM_INT({
-
-    var canvasWidth = (window.innerWidth) * .72;
-    return canvasWidth;
-
-});
-
-int get_game_height = EM_ASM_INT({
-
-    var canvasHeight = (window.innerHeight) * .80;
-    return canvasHeight;
-
-});
-
-int get_player_width = EM_ASM_INT({
-
-    var canvas = (window.innerWidth) * .72;
-    var playerWidth = canvas * .03;
-    return playerWidth;
-
-});
-
-int get_player_height = EM_ASM_INT({
-
-    var canvas = (window.innerWidth) * .72;
-    var playerHeight = canvas * .03;
-    return playerHeight;
-
-});
-
 int main(){
-    
-    canvasDem_t.canvas_width = get_game_width;
-    canvasDem_t.canvas_height = get_game_height;
-
-    playerDem_t.player_width = get_player_width;
-    playerDem_t.player_height = get_player_height;
-    //printf("%f\n", get_player_width); //for console logging floats and doubles
-    //printf("%d\n", get_player_width); //for console logging ints
 
     SDL_Init(SDL_INIT_VIDEO);
+
+    SDL_GetCurrentDisplayMode(0, &dm);
+
+    canvasDem_t.canvas_width = (int)(dm.w * 0.72);
+    canvasDem_t.canvas_height = (int)(dm.h * 0.80);
+
+    playerDem_t.player_width = (int)(canvasDem_t.canvas_width * 0.03);
+    playerDem_t.player_height = (int)(canvasDem_t.canvas_width * 0.03);
+
+    //printf("%f\n", get_player_width); //for console logging floats and doubles
+    //printf("%d\n", get_player_width); //for console logging ints
     
     create_window();
 
