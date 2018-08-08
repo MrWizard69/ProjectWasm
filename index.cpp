@@ -24,10 +24,11 @@ struct context{ // this is for handling the stage and frames
 
 struct player_Position{ //this is for handling player position and input states
 
-    int player_VX;
-    int player_VY;
-    int player_X;
-    int player_Y;
+    double player_VX;
+    double player_VY;
+
+    double player_X;
+    double player_Y;
 
     bool up_pressed;
     bool down_pressed;
@@ -147,26 +148,26 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
     if(playerPos_t.up_pressed == true && 
         playerPos_t.left_pressed == true){
 
-            playerPos_t.player_VY = (int)(canvasDem_t.canvas_height * .005) * -1;
-            playerPos_t.player_VX = (int)(canvasDem_t.canvas_width * .005) * -1;
+            playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005) * -1;
+            playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005) * -1;
     }
     if(playerPos_t.up_pressed == true && 
         playerPos_t.right_pressed == true){
 
-            playerPos_t.player_VY = (int)(canvasDem_t.canvas_height * .005) * -1;
-            playerPos_t.player_VX = (int)(canvasDem_t.canvas_width * .005);
+            playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005) * -1;
+            playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005);
     }
     if(playerPos_t.down_pressed == true && 
         playerPos_t.left_pressed == true){
 
-            playerPos_t.player_VY = (int)(canvasDem_t.canvas_height * .005);
-            playerPos_t.player_VX = (int)(canvasDem_t.canvas_width * .005) * -1;
+            playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005);
+            playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005) * -1;
     }
     if(playerPos_t.down_pressed == true && 
         playerPos_t.right_pressed == true){
 
-            playerPos_t.player_VY = (int)(canvasDem_t.canvas_height * .005);
-            playerPos_t.player_VX = (int)(canvasDem_t.canvas_width * .005);
+            playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005);
+            playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005);
     }
 
     // These are for straight movement
@@ -174,28 +175,28 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
         playerPos_t.left_pressed == false &&
         playerPos_t.right_pressed == false){
 
-        playerPos_t.player_VY = (int)(canvasDem_t.canvas_height * .005) * -1;
+        playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005) * -1;
         playerPos_t.player_VX = 0;
     }
     if(playerPos_t.down_pressed == true && 
         playerPos_t.left_pressed == false &&
         playerPos_t.right_pressed == false){
 
-        playerPos_t.player_VY = (int)(canvasDem_t.canvas_height * .005);
+        playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005);
         playerPos_t.player_VX = 0;
     }
     if(playerPos_t.left_pressed == true && 
         playerPos_t.up_pressed == false &&
         playerPos_t.down_pressed == false){
 
-        playerPos_t.player_VX = (int)(canvasDem_t.canvas_width * .005) * -1;
+        playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005) * -1;
         playerPos_t.player_VY = 0;
     }
     if(playerPos_t.right_pressed == true && 
         playerPos_t.up_pressed == false &&
         playerPos_t.down_pressed == false){
 
-        playerPos_t.player_VX = (int)(canvasDem_t.canvas_width * .005);
+        playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005);
         playerPos_t.player_VY = 0;
     }
 
@@ -238,17 +239,17 @@ void rebuild_window(){ //this will rebuild the window and apply the new viewport
 
 void resize_game(int width, int height){ //this will listen for screen size changes and apply new dementions
 
-    if(width > canvasDem_t.canvas_width || width < canvasDem_t.canvas_width){ // breaks at canvas width 640; height 573
-                                                                             // keep an eye out. appears to be fixed
+    if(width > canvasDem_t.canvas_width || width < canvasDem_t.canvas_width){
+
         double width_variation;
 
-        width_variation =  round(10 * ((double)playerPos_t.player_X / canvasDem_t.canvas_width)) / 10;
+        width_variation =  ((double)playerPos_t.player_X / canvasDem_t.canvas_width);
             
         canvasDem_t.canvas_width = width;
         playerDem_t.player_width = (int)width * .03;
         playerDem_t.player_height = (int)width * .03;
 
-        playerPos_t.player_X = width * width_variation;
+        playerPos_t.player_X = (double)width * width_variation;
 
         rebuild_window();
         
@@ -258,11 +259,11 @@ void resize_game(int width, int height){ //this will listen for screen size chan
 
         double height_variation;
 
-        height_variation =  round(10 * ((double)playerPos_t.player_Y / canvasDem_t.canvas_height)) / 10;
+        height_variation =  ((double)playerPos_t.player_Y / canvasDem_t.canvas_height);
 
         canvasDem_t.canvas_height = height;
 
-        playerPos_t.player_Y = height * height_variation;
+        playerPos_t.player_Y = (double)height * height_variation;
 
         rebuild_window();
     }
