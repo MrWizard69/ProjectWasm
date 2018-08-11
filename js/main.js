@@ -13,8 +13,6 @@
 
         let canvas = document.getElementById('canvas');
 
-        let firstRun = true;
-
         joyX = -1;
         joyY = -1;
         joyMovement(joyX, joyY);
@@ -245,13 +243,7 @@
                  }
                  else if(canvas.width >= 596){
         
-                 }
-                 if(firstRun == true && canvas.width >= 350){
-
-                    document.getElementById('joystick').style.display = 'none';
-                    document.getElementById('rotation-message').style.display = 'block';
-                    firstRun = false;
-                 }		
+                 }	
                 
                 redraw();
             }
