@@ -31,6 +31,9 @@ struct player_Position{ //this is for handling player position and input states
     double player_X;
     double player_Y;
 
+    int joy_x; //right=2, left=4
+    int joy_y; //up=1, down=3
+
     bool up_pressed;
     bool down_pressed;
     bool left_pressed;
@@ -54,6 +57,154 @@ struct player_dementions{
     int player_height;
 
 }playerDem_t;
+
+void move_player(){
+
+    // These are for diagonal movement
+    if(playerPos_t.up_pressed == true && 
+        playerPos_t.left_pressed == true){
+
+            playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005) * -1;
+            playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005) * -1;
+    }
+    if(playerPos_t.up_pressed == true && 
+        playerPos_t.right_pressed == true){
+
+            playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005) * -1;
+            playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005);
+    }
+    if(playerPos_t.down_pressed == true && 
+        playerPos_t.left_pressed == true){
+
+            playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005);
+            playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005) * -1;
+    }
+    if(playerPos_t.down_pressed == true && 
+        playerPos_t.right_pressed == true){
+
+            playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005);
+            playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005);
+    }
+
+    // These are for straight movement
+    if(playerPos_t.up_pressed == true && 
+        playerPos_t.left_pressed == false &&
+        playerPos_t.right_pressed == false){
+
+        playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005) * -1;
+        playerPos_t.player_VX = 0;
+    }
+    if(playerPos_t.down_pressed == true && 
+        playerPos_t.left_pressed == false &&
+        playerPos_t.right_pressed == false){
+
+        playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005);
+        playerPos_t.player_VX = 0;
+    }
+    if(playerPos_t.left_pressed == true && 
+        playerPos_t.up_pressed == false &&
+        playerPos_t.down_pressed == false){
+
+        playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005) * -1;
+        playerPos_t.player_VY = 0;
+    }
+    if(playerPos_t.right_pressed == true && 
+        playerPos_t.up_pressed == false &&
+        playerPos_t.down_pressed == false){
+
+        playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005);
+        playerPos_t.player_VY = 0;
+    }
+
+    //This is when no movement keys are pressed
+    if(playerPos_t.up_pressed == false && 
+       playerPos_t.down_pressed == false &&
+       playerPos_t.left_pressed == false &&
+       playerPos_t.right_pressed == false){
+
+        playerPos_t.player_VX = 0;
+        playerPos_t.player_VY = 0;
+    }
+}
+
+void joystick_movement() {
+
+    if(playerPos_t.joy_x == 4 && playerPos_t.joy_y == 1){ // key-up = 0, up = 1, right = 2, down = 3, left = 4;
+
+        playerPos_t.up_pressed = true;
+        playerPos_t.down_pressed = false;
+        playerPos_t.left_pressed = true;
+        playerPos_t.right_pressed = false;
+                            
+    }
+    else if(playerPos_t.joy_x == 4 && playerPos_t.joy_y == 3 ){
+
+        playerPos_t.up_pressed = false;
+        playerPos_t.down_pressed = true;
+        playerPos_t.left_pressed = true;
+        playerPos_t.right_pressed = false;
+                            
+    }
+    else if(playerPos_t.joy_x == 2 && playerPos_t.joy_y == 1){
+
+        playerPos_t.up_pressed = true;
+        playerPos_t.down_pressed = false;
+        playerPos_t.left_pressed = false;
+        playerPos_t.right_pressed = true;
+                            
+    }
+    else if(playerPos_t.joy_x == 2 && playerPos_t.joy_y == 3){
+
+        playerPos_t.up_pressed = false;
+        playerPos_t.down_pressed = true;
+        playerPos_t.left_pressed = false;
+        playerPos_t.right_pressed = true;
+                            
+    }
+    else if(playerPos_t.joy_x == 4 && playerPos_t.joy_y == 0){
+
+        playerPos_t.up_pressed = false;
+        playerPos_t.down_pressed = false;
+        playerPos_t.left_pressed = true;
+        playerPos_t.right_pressed = false;		
+                            
+    }
+    else if(playerPos_t.joy_x == 2 && playerPos_t.joy_y == 0){
+
+        playerPos_t.up_pressed = false;
+        playerPos_t.down_pressed = false;
+        playerPos_t.left_pressed = false;
+        playerPos_t.right_pressed = true;												
+                            
+    }
+    else if(playerPos_t.joy_x == 0 && playerPos_t.joy_y == 1){
+	
+        playerPos_t.up_pressed = true;
+        playerPos_t.down_pressed = false;
+        playerPos_t.left_pressed = false;
+        playerPos_t.right_pressed = false;	
+                            
+    }
+    else if(playerPos_t.joy_x == 0 && playerPos_t.joy_y == 3){
+
+        playerPos_t.up_pressed = false;
+        playerPos_t.down_pressed = true;
+        playerPos_t.left_pressed = false;
+        playerPos_t.right_pressed = false;								
+                            
+    }
+    else if(playerPos_t.joy_x == 0 && playerPos_t.joy_y == 0){
+
+        playerPos_t.up_pressed = false;
+        playerPos_t.down_pressed = false;
+        playerPos_t.left_pressed = false;
+        playerPos_t.right_pressed = false;								
+                            
+    }
+
+    move_player();
+
+}
 
 void input_listenter(struct context *ctx){ //This is for listening for the keyboard controls
 
@@ -148,79 +299,17 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
         }
 
     }
-    // These are for diagonal movement
-    if(playerPos_t.up_pressed == true && 
-        playerPos_t.left_pressed == true){
 
-            playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005) * -1;
-            playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005) * -1;
-    }
-    if(playerPos_t.up_pressed == true && 
-        playerPos_t.right_pressed == true){
-
-            playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005) * -1;
-            playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005);
-    }
-    if(playerPos_t.down_pressed == true && 
-        playerPos_t.left_pressed == true){
-
-            playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005);
-            playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005) * -1;
-    }
-    if(playerPos_t.down_pressed == true && 
-        playerPos_t.right_pressed == true){
-
-            playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005);
-            playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005);
-    }
-
-    // These are for straight movement
-    if(playerPos_t.up_pressed == true && 
-        playerPos_t.left_pressed == false &&
-        playerPos_t.right_pressed == false){
-
-        playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005) * -1;
-        playerPos_t.player_VX = 0;
-    }
-    if(playerPos_t.down_pressed == true && 
-        playerPos_t.left_pressed == false &&
-        playerPos_t.right_pressed == false){
-
-        playerPos_t.player_VY = (double)(canvasDem_t.canvas_height * .005);
-        playerPos_t.player_VX = 0;
-    }
-    if(playerPos_t.left_pressed == true && 
-        playerPos_t.up_pressed == false &&
-        playerPos_t.down_pressed == false){
-
-        playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005) * -1;
-        playerPos_t.player_VY = 0;
-    }
-    if(playerPos_t.right_pressed == true && 
-        playerPos_t.up_pressed == false &&
-        playerPos_t.down_pressed == false){
-
-        playerPos_t.player_VX = (double)(canvasDem_t.canvas_width * .005);
-        playerPos_t.player_VY = 0;
-    }
-
-    //This is when no movement keys are pressed
-    if(playerPos_t.up_pressed == false && 
-       playerPos_t.down_pressed == false &&
-       playerPos_t.left_pressed == false &&
-       playerPos_t.right_pressed == false){
-
-        playerPos_t.player_VX = 0;
-        playerPos_t.player_VY = 0;
-    }
+    move_player();
 }
-extern "C" {
+extern "C" { // this is for running functions from JavaScript
 
-    int test(int x) {
+    int assign_joy(int x, int y){
 
-        printf("Project Goes Blep Blep!\n");
+        playerPos_t.joy_x = x;
+        playerPos_t.joy_y = y;
 
-        return sqrt(x);
+        return 1;
     }
 
 }
@@ -290,6 +379,7 @@ void physics_loop(void *arg){ //this is the main loop
     SDL_Renderer *renderer = ctx->renderer;
 
     input_listenter(ctx); //get the keypresses
+    joystick_movement(); //gets the joystick movement
 
     playerPos_t.player_X += playerPos_t.player_VX;
     playerPos_t.player_Y += playerPos_t.player_VY;
@@ -367,8 +457,11 @@ int main(){
 
     playerPos_t.player_VX = 0;
     playerPos_t.player_VY = 0;
+    playerPos_t.joy_x = 0;
+    playerPos_t.joy_y = 0;
     playerPos_t.player_X = (canvasDem_t.canvas_width) * .50;
     playerPos_t.player_Y = (canvasDem_t.canvas_height) * .50;
+
 
     const int loop = 1; // <- call the function as fast as the browser can (typically 60fps)
     const int fps = -1; // <- call the function as fast as the browser can (typically 60fps)
