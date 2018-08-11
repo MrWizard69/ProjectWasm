@@ -214,6 +214,16 @@ void input_listenter(struct context *ctx){ //This is for listening for the keybo
         playerPos_t.player_VY = 0;
     }
 }
+extern "C" {
+
+    int test(int x) {
+
+        printf("Project Goes Blep Blep!\n");
+
+        return sqrt(x);
+    }
+
+}
 
 void create_window(){ //this is used to create the window
 
@@ -303,6 +313,7 @@ void physics_loop(void *arg){ //this is the main loop
     // SDL_GetCurrentDisplayMode(0, &dm);
 
     // canvasDem_t.new_canvas_width = (int)(dm.w * 0.72);
+    //printf("%d\n", (int)(dm.w * 0.72));
     // canvasDem_t.new_canvas_height = (int)(dm.h * 0.80);
 
 
