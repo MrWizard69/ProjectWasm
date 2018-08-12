@@ -12,7 +12,6 @@
 	-o-transition: all 1s; 
 	transition: all 1s ;  
     /*--------------This is what activates GPU graphic rendering End------------------*/
-    display: none;
 }
 
 #canvas {

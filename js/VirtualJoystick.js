@@ -3,7 +3,7 @@
 		
 			let opts			= opt			|| {};
 			this._container		= opts.container	|| document.body;
-			this._strokeStyle	= opts.strokeStyle	|| 'white';//'#333333';// this changes the color of the joystick
+			this._strokeStyle	= opts.strokeStyle	|| '#4b0082'; //white//'#333333';// this changes the color of the joystick
 			this._stickEl		= opts.stickElement	|| _buildJoystickStick(this._strokeStyle);
 			this._baseEl		= opts.baseElement	|| _buildJoystickBase(this._baseEl);
 			this._mouseSupport	= opts.mouseSupport !== undefined ? opts.mouseSupport : false;

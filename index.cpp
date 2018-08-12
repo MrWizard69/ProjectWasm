@@ -417,7 +417,7 @@ void physics_loop(void *arg){ //this is the main loop
     SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255);
     SDL_RenderClear(renderer);
     
-    // purple player
+    // purple(Indigo) player
     SDL_Rect rect;
     rect.w = playerDem_t.player_width;
     rect.h = playerDem_t.player_height;
@@ -457,8 +457,6 @@ int main(){
 
     playerPos_t.player_VX = 0;
     playerPos_t.player_VY = 0;
-    playerPos_t.joy_x = 0;
-    playerPos_t.joy_y = 0;
     playerPos_t.player_X = (canvasDem_t.canvas_width) * .50;
     playerPos_t.player_Y = (canvasDem_t.canvas_height) * .50;
 
