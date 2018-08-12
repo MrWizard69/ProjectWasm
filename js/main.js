@@ -17,21 +17,7 @@
         joyY = -1;
         joyMovement(joyX, joyY);
 
-        // joyStickX = (window.innerWidth) * .07;
-		// joyStickY = (window.innerHeight) * 0.55;
-
         let joystick;
-
-
-        // let joystick = new VirtualJoystick({
-        //     container: document.getElementById('joystick'),
-        //     mouseSupport: true,
-        //     limitStickTravel: true,
-        //     stationaryBase: true, // to make the joystick appear anywhere, set to false and comment out BaseX and BaseY
-        //           baseX: joyStickX, // this size is only good for mobile maybe not tablets
-        //           baseY: joyStickY, // this size is only good for mobile maybe not tablets
-        //     stickRadius: 25
-        // });	
 
         initialize(); // this is the function that will look at the browser window size and will resize everything
 
@@ -50,7 +36,7 @@
                 joyY = -1;
                 joyMovement(joyX, joyY);
 
-            }, 25);
+            }, 30);
 		}
 
         document.getElementById('joystick').addEventListener('touchstart', joystickTap);
@@ -132,61 +118,54 @@
 
                         joyX = 4;
                         joyY = 1;
-                        joyMovement(joyX, joyY);
                             
                     }
                     else if(joyDirX == 'left' && joyDirY == 'down'){
 
                         joyX = 4;
                         joyY = 3;
-                        joyMovement(joyX, joyY);
                             
                     }
                     else if(joyDirY == 'up' && joyDirX == 'right'){
 
                         joyX = 2;
                         joyY = 1;
-                        joyMovement(joyX, joyY);
                             
                     }
                     else if(joyDirY == 'down' && joyDirX == 'right'){
 
                         joyX = 2;
                         joyY = 3;
-                        joyMovement(joyX, joyY);
                             
                     }
                     else if(joyDirX == 'left'){
 
                         joyX = 4;
-                        joyY = 0;
-                        joyMovement(joyX, joyY);		
+                        joyY = 0;		
                             
                     }
                     else if(joyDirX == 'right'){
 
                         joyX = 2;
-                        joyY = 0;
-                        joyMovement(joyX, joyY);													
+                        joyY = 0;											
                             
                     }
                     else if(joyDirY == 'up'){
 
                         joyX = 0;
-                        joyY = 1;
-                        joyMovement(joyX, joyY);	
+                        joyY = 1;	
                             
                     }
                     else if(joyDirY == 'down'){
 
                         joyX = 0;
-                        joyY = 3;	
-                        joyMovement(joyX, joyY);							
+                        joyY = 3;								
                             
                     }
+                    joyMovement(joyX, joyY);
                 
                 }
-        }, 120);
+        }, 120); //120
 		
         function initialize() {
             // Register an event listener to
@@ -206,52 +185,78 @@
             // Runs each time the DOM window resize event fires.
             // Resets the canvas dimensions to match window,
             // then draws the new borders accordingly.
-            function resizeCanvas() {  
+            function resizeCanvas() {
 
-                // joyStick_X = (window.innerWidth) * .91;
-                // joyStick_Y = (window.innerHeight) * .55;	
-                joyStickX = (window.innerWidth) * .07;
-                joyStickY = (window.innerHeight) * 0.55;
+                document.getElementById('rotation-message').style.display = 'none';
+                document.getElementById('joystick').style.display = 'none';
 
-                if(joystick != undefined){
+                setTimeout(function(){
 
-                    joystick.destroy();
-                }   
+                    if(joystick != undefined){
 
-                joystick = new VirtualJoystick({
-                    container: document.getElementById('joystick'),
-                    mouseSupport: true,
-                    limitStickTravel: true,
-                    stationaryBase: true, // to make the joystick appear anywhere, set to false and comment out BaseX and BaseY
-                            baseX: joyStickX, // this size is only good for mobile maybe not tablets
-                            baseY: joyStickY, // this size is only good for mobile maybe not tablets
-                    stickRadius: 25
-                });   
+                        joystick.destroy();
+                        joystick = null;
+                    }
+
+                    // joyStick_X = (window.innerWidth) * .91;
+                    // joyStick_Y = (window.innerHeight) * .55;	
+                    joyStickX = (window.innerWidth) * .07;
+                    joyStickY = (window.innerHeight) * 0.55;
+
+                    canvas.width = (window.innerWidth) * .72;
+
+                    joystick = new VirtualJoystick({
+                        container: document.getElementById('joystick'),
+                        mouseSupport: true,
+                        limitStickTravel: true,
+                        stationaryBase: true, // to make the joystick appear anywhere, set to false and comment out BaseX and BaseY
+                                baseX: joyStickX, // this size is only good for mobile maybe not tablets
+                                baseY: joyStickY, // this size is only good for mobile maybe not tablets
+                        stickRadius: 25
+                    });   
+
+                    console.log(canvas.width);
+                
+                    // if(canvas.width >= 241){
+                        
+                        
+                    // }
+                    if(canvas.width >= 350){
+
+                        // document.getElementById('joystick').style.display = 'none';
+                        // document.getElementById('rotation-message').style.display = 'block';
+                        console.log('here');
+                        document.getElementById('joystick').style.display = 'inline-block';
+                        document.getElementById('rotation-message').style.display = 'none';
+                        
+                    }		
+                    
+                    if(canvas.width <= 300){
+                        
+                        // document.getElementById('joystick').style.display = 'inline-block';
+                        // document.getElementById('rotation-message').style.display = 'none';
+                        console.log('less than 300');
+                        document.getElementById('joystick').style.display = 'none';
+                        document.getElementById('rotation-message').style.display = 'block';
+
+                    }
+                    // if(canvas.width >= 350){
+
+                    //     document.getElementById('joystick').style.display = 'none';
+                    //     document.getElementById('rotation-message').style.display = 'block';
+                    //     console.log('here');
+                        
+                    // }		
+                    // if(canvas.width > 350 && canvas.width <= 595){
+                    //     console.log('here');
+                    //  }
+                    //  if(canvas.width >= 596){
             
-                if(canvas.width >= 241){
+                    //  }	
                     
-                    
-                }
-                
-                if(canvas.width <= 300){
-                    
-                    document.getElementById('joystick').style.display = 'inline-block';
-                    document.getElementById('rotation-message').style.display = 'none';
-                }
-                if(canvas.width >= 350){
+                    redraw();
 
-                    document.getElementById('joystick').style.display = 'none';
-                    document.getElementById('rotation-message').style.display = 'block';
-                    
-                }		
-                if(canvas.width > 350 && canvas.width <= 595){
-                    
-                 }
-                 if(canvas.width >= 596){
-        
-                 }	
-                
-                redraw();
+                }, 200);  
             }
         
     }
