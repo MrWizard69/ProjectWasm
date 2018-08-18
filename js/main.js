@@ -10,14 +10,15 @@
         let joyX = 0;
         let joyY = 0;
         let joyMovement = Module.cwrap('assign_joy', 'number', ['number']);
-
+        let joystick;
         let canvas = document.getElementById('canvas');
+        let chatting = false;
 
         joyX = -1;
         joyY = -1;
         joyMovement(joyX, joyY);
 
-        let joystick;
+        //document.getElementById('play').style.display = 'none';
 
         initialize(); // this is the function that will look at the browser window size and will resize everything
 
@@ -166,6 +167,95 @@
                 
                 }
         }, 120); //120
+
+        document.getElementById('openChat').addEventListener('click', tapChat);
+
+        function tapChat(){
+
+            document.getElementById('gameWrap').style.display = 'none';
+            document.getElementById('dataChannelWrap').style.display = 'inline-block';
+            chatting = true;
+            document.getElementById('openChat').style.display = 'none';
+            document.getElementById('closeChat').style.display = 'inline-block';
+        }
+
+        document.getElementById('closeChat').addEventListener('click', tapChatClose);
+
+        function tapChatClose(){
+
+            document.getElementById('gameWrap').style.display = 'inline-block';
+            document.getElementById('dataChannelWrap').style.display = 'none';
+            chatting = false;
+            document.getElementById('openChat').style.display = 'inline-block';
+            document.getElementById('closeChat').style.display = 'none';
+        }
+
+        //document.getElementById('play').addEventListener('click', tapPlay);
+
+        function tapPlay(){
+
+            //Module.requestFullscreen(true, false);
+            //document.documentElement.webkitRequestFullScreen();
+            //Module.requestFullscreen(false, false);
+
+            if (!document.fullscreenElement) {  // current working methods
+                if (document.documentElement.requestFullscreen) {
+                    //document.documentElement.requestFullscreen();
+                }
+                else if (document.documentElement.webkitRequestFullscreen) {
+
+                    document.documentElement.webkitRequestFullScreen();
+                    Module.requestFullscreen(1, 1); // figure out how to full screen future Jordan!
+                } 
+            }
+
+            // setTimeout(() => {
+            //     Module.requestFullscreen(1, 1);
+            // }, 300);
+
+            // setTimeout(() => {
+            //     document.documentElement.webkitRequestFullScreen();
+            //     //Module.requestFullscreen(true, false);
+            //     Module.requestFullscreen(true, false);
+            // }, 200);
+
+            // if (document.webkitExitFullscreen) {
+            //     //console.log('here');
+            //     //document.documentElement.webkitRequestFullScreen();
+                
+            //     //Module.requestFullscreen(1, 1);
+            //     document.documentElement.webkitRequestFullScreen();
+            //     Module.requestFullscreen(1, 1); 
+            //     //Module.requestFullscreen(true, false);
+            //     //document.webkitExitFullscreen();
+            // }
+
+            //Module.requestFullscreen(false, false);
+            //document.documentElement.webkitRequestFullScreen();
+            //Module.requestFullscreen(false, false);
+            //document.documentElement.webkitRequestFullScreen();
+            //document.documentElement.webkitRequestFullScreen();
+            //Module.requestFullscreen(1, 1);
+            //Module.requestFullscreen(1, 1);
+
+            //console.log(window.innerWidth);
+
+            //Module.requestFullscreen(true, false);
+            //Module.requestFullscreen(true, false);
+            //Module.requestFullscreen(1, 1);
+
+            joystick = new VirtualJoystick({
+                container: document.getElementById('joystick'),
+                mouseSupport: true,
+                limitStickTravel: true,
+                stationaryBase: true, // to make the joystick appear anywhere, set to false and comment out BaseX and BaseY
+                        baseX: joyStickX, // this size is only good for mobile maybe not tablets
+                        baseY: joyStickY, // this size is only good for mobile maybe not tablets
+                stickRadius: 25
+            });
+
+ 
+        }
 		
         function initialize() {
             // Register an event listener to
@@ -189,6 +279,7 @@
 
                 document.getElementById('rotation-message').style.display = 'none';
                 document.getElementById('joystick').style.display = 'none';
+                document.getElementById('openChat').style.display = 'none';
 
                 setTimeout(function(){
 
@@ -214,30 +305,48 @@
                                 baseY: joyStickY, // this size is only good for mobile maybe not tablets
                         stickRadius: 25
                     });   
-
-                    console.log(canvas.width);
-                
                     // if(canvas.width >= 241){
                         
                         
                     // }
                     if(canvas.width >= 350){
 
-                        // document.getElementById('joystick').style.display = 'none';
-                        // document.getElementById('rotation-message').style.display = 'block';
-                        console.log('here');
                         document.getElementById('joystick').style.display = 'inline-block';
                         document.getElementById('rotation-message').style.display = 'none';
+
+                        if(chatting == false){
+                            document.getElementById('openChat').style.display = 'inline-block';
+                        }
+                        else{
+                            document.getElementById('closeChat').style.display = 'inline-block';
+                        }
+                        
+                        
+                        //document.getElementById('play').style.display = 'inline-block';
                         
                     }		
                     
                     if(canvas.width <= 300){
                         
-                        // document.getElementById('joystick').style.display = 'inline-block';
-                        // document.getElementById('rotation-message').style.display = 'none';
-                        console.log('less than 300');
                         document.getElementById('joystick').style.display = 'none';
                         document.getElementById('rotation-message').style.display = 'block';
+                        //document.getElementById('openChat').style.display = 'none';
+                        if(chatting == false){
+                            document.getElementById('openChat').style.display = 'none';
+                        }
+                        else{
+                            document.getElementById('closeChat').style.display = 'none';
+                        }
+                        //document.getElementById('play').style.display = 'none';
+
+                        // if (document.exitFullscreen) {
+						// 	document.exitFullscreen();
+                        // }
+                        // else if (document.webkitExitFullscreen) {
+                        //     document.webkitExitFullscreen();
+                        // }
+
+                        // Module.exitFullscreen(1, 1);
 
                     }
                     // if(canvas.width >= 350){

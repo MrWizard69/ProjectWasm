@@ -26,3 +26,74 @@
 	text-align: center;
 	display: none;
 }
+
+/* #play{
+
+	width: 55%;
+    height: 3.5em;
+    position: absolute;
+	top: 50%;
+	left: 22%;
+	border-radius: 25px;
+	
+	text-decoration: none;
+    color: #fff;
+    background-color: #3949ab;
+    text-align: center;
+	letter-spacing: .2em;
+	font-size: 1em;
+	outline: 0;
+	border: none;
+    display: inline-block;
+	text-transform: uppercase;
+} */
+
+#dataChannelWrap{
+
+	display: none;
+	width: 100%;
+}
+
+#openChat{
+
+    width: 21%;
+    height: 3.5em;
+    position: absolute;
+    top: 84%;
+    right: 3.3%;
+	border-radius: 25px;
+	
+	text-decoration: none;
+    color: #fff;
+    background-color: #3949ab;
+    text-align: center;
+	letter-spacing: .2em;
+	font-size: 1em;
+	outline: 0;
+	border: none;
+    display: inline-block;
+	text-transform: uppercase;
+	display: none;
+}
+
+#closeChat{
+
+    width: 21%;
+    height: 3.5em;
+    position: absolute;
+    top: 84%;
+    right: 3.3%;
+	border-radius: 25px;
+	
+	text-decoration: none;
+    color: #fff;
+    background-color: #3949ab;
+    text-align: center;
+	letter-spacing: .2em;
+	font-size: 1em;
+	outline: 0;
+	border: none;
+    display: inline-block;
+	text-transform: uppercase;
+	display: none;
+}

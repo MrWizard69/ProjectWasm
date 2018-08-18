@@ -13,7 +13,8 @@
 
 SDL_Window *window;
 SDL_Renderer *renderer;
-Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
+//Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
+Uint32 flags = SDL_WINDOW_OPENGL;
 SDL_DisplayMode dm;
 
 struct context{ // this is for handling the stage and frames
