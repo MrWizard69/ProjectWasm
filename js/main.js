@@ -173,21 +173,23 @@
         function tapChat(){
 
             document.getElementById('gameWrap').style.display = 'none';
-            document.getElementById('dataChannelWrap').style.display = 'inline-block';
+            document.getElementById('dataChannelWrap').style.display = 'block';
             chatting = true;
             document.getElementById('openChat').style.display = 'none';
             document.getElementById('closeChat').style.display = 'inline-block';
+            document.getElementById('rotation-message').style.display = 'none';
         }
 
         document.getElementById('closeChat').addEventListener('click', tapChatClose);
 
         function tapChatClose(){
 
-            document.getElementById('gameWrap').style.display = 'inline-block';
+            document.getElementById('gameWrap').style.display = 'block';
             document.getElementById('dataChannelWrap').style.display = 'none';
             chatting = false;
             document.getElementById('openChat').style.display = 'inline-block';
             document.getElementById('closeChat').style.display = 'none';
+            document.getElementById('rotation-message').style.display = 'block';
         }
 
         //document.getElementById('play').addEventListener('click', tapPlay);
@@ -315,10 +317,10 @@
                         document.getElementById('rotation-message').style.display = 'none';
 
                         if(chatting == false){
-                            document.getElementById('openChat').style.display = 'inline-block';
+                            document.getElementById('openChat').style.display = 'none';
                         }
                         else{
-                            document.getElementById('closeChat').style.display = 'inline-block';
+                            document.getElementById('closeChat').style.display = 'none';
                         }
                         
                         
@@ -329,13 +331,14 @@
                     if(canvas.width <= 300){
                         
                         document.getElementById('joystick').style.display = 'none';
-                        document.getElementById('rotation-message').style.display = 'block';
+                        
                         //document.getElementById('openChat').style.display = 'none';
                         if(chatting == false){
-                            document.getElementById('openChat').style.display = 'none';
+                            document.getElementById('openChat').style.display = 'inline-block';
+                            document.getElementById('rotation-message').style.display = 'block';
                         }
                         else{
-                            document.getElementById('closeChat').style.display = 'none';
+                            document.getElementById('closeChat').style.display = 'inline-block';
                         }
                         //document.getElementById('play').style.display = 'none';
 
