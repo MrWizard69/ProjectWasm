@@ -22,6 +22,101 @@
 
         initialize(); // this is the function that will look at the browser window size and will resize everything
 
+
+        let interval;
+
+        function isControllerConntected(){
+
+            if (!('ongamepadconnected' in window)) {
+
+                
+                interval = setInterval(pollGamepads, 500);
+            }
+        }
+
+        isControllerConntected();
+        
+        function pollGamepads() {
+            let gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
+            //console.log(gamepads);
+            for (let i = 0; i < gamepads.length; i++) {
+
+                let gp = gamepads[i];
+
+                if (gp && gp.buttons.length > 0) {
+                    console.log("Gamepad connected at index " + gp.index + ": " + gp.id +
+                    ". It has " + gp.buttons.length + " buttons and " + gp.axes.length + " axes.");
+                    controllerIndex = gp.index;
+                    controllerLoop();
+                    clearInterval(interval);
+                    //isControllerConntected();
+                
+                }
+            }
+        }
+
+        function controllerLoop() {
+            var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
+            if (!gamepads) {
+              return;
+            }
+          
+            var gp = gamepads[controllerIndex];
+
+            if(gp && gp.axes[0]){
+
+                if(gp.axes[0] < 0.08){ // stand still
+
+                    joyX = 0;
+                    joyY = 0;
+                }
+                if(gp.axes[0] === -1){ // left
+
+                    joyX = 4;
+                    joyY = 0;
+                }
+                if(gp.axes[0] === 1){ // right
+
+                    joyX = 2;
+                    joyY = 0;
+                }
+
+                joyMovement(joyX, joyY);
+                // if(gp.axes[0] < -0.59 && gp.axes[0] < 0.28){ // up
+
+                //     joyX = 0;
+                //     joyY = 1;
+                // }
+                // if(gp.axes[0] < -0.59 && gp.axes[0] < 0.28){ // up
+
+                //     joyX = 0;
+                //     joyY = 1;
+                // }
+
+                //console.log(gp.axes[0]);
+
+                
+            }
+
+            
+            // if (buttonPressed(gp.buttons[0])) {
+            //   b--;
+            // } else if (buttonPressed(gp.buttons[2])) {
+            //   b++;
+            // }
+            // if (buttonPressed(gp.buttons[1])) {
+            //   a++;
+            // } else if (buttonPressed(gp.buttons[3])) {
+            //   a--;
+            // }
+          
+            //ball.style.left = a * 2 + "px";
+            //ball.style.top = b * 2 + "px";
+          
+            start = requestAnimationFrame(controllerLoop);
+          }
+
+
         document.getElementById('joystick').addEventListener('touchend', joystickTapEnd);
 		
 		function joystickTapEnd(){
@@ -47,7 +142,7 @@
             joyTouch = true; // the joystick was touched and now in the Update function it will be checking the direction of the joystick
         }
 
-        setInterval(function(){ 
+        setInterval(function(){ // The math going on in here is hard on the CPU. Look into Dx and Dy values for manual mapping
 
             if(joyTouch == true){
 					
@@ -246,15 +341,16 @@
             //Module.requestFullscreen(true, false);
             //Module.requestFullscreen(1, 1);
 
-            joystick = new VirtualJoystick({
-                container: document.getElementById('joystick'),
-                mouseSupport: true,
-                limitStickTravel: true,
-                stationaryBase: true, // to make the joystick appear anywhere, set to false and comment out BaseX and BaseY
-                        baseX: joyStickX, // this size is only good for mobile maybe not tablets
-                        baseY: joyStickY, // this size is only good for mobile maybe not tablets
-                stickRadius: 25
-            });
+            // joystick = new VirtualJoystick({
+            //     container: document.getElementById('joystick'),
+            //     mouseSupport: true,
+            //     limitStickTravel: true,
+            //     stationaryBase: true, // to make the joystick appear anywhere, set to false and comment out BaseX and BaseY
+            //             baseX: joyStickX, // this size is only good for mobile maybe not tablets
+            //             baseY: joyStickY, // this size is only good for mobile maybe not tablets
+            //     stickRadius: 25
+            // });
+            
 
  
         }
@@ -298,7 +394,7 @@
 
                     canvas.width = (window.innerWidth) * .72;
 
-                    joystick = new VirtualJoystick({
+                    joystick = new VirtualJoystick({ // The math going on in here is hard on the CPU. Look into Dx and Dy values for manual mapping
                         container: document.getElementById('joystick'),
                         mouseSupport: true,
                         limitStickTravel: true,
