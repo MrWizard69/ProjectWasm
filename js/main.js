@@ -62,38 +62,79 @@
             }
           
             let gp = gamepads[controllerIndex];
+            let dirX = 'none';
+            let dirY = 'none';
 
             if(gp && gp.axes[0]){
+
+                // if(gp.axes[0] < 0.077){ // stand still //0.08
+
+                //     joyX = 0;
+                //     joyY = 0;
+                //     dirX = 'none';
+                //     dirY = 'none';
+                // }
+                // if(gp.axes[0] <= -0.5 || gp.axes[0] === -1){ // left
+
+                //     joyX = 4;
+                //     joyY = 0;
+                //     dirX = 'left';
+                //     dirY = 'none';
+                // }
+                // if(gp.axes[0] >= 0.5 || gp.axes[0] === 1){ // right
+
+                //     joyX = 2;
+                //     joyY = 0;
+                //     dirX = 'right';
+                //     dirY = 'none';
+                // }
+                // if(gp.axes[0] < -0.3  && dirX != 'left' || gp.axes[0] >= 0.3 && dirX != 'right' ){ // up
+
+                //     joyX = 0;
+                //     joyY = 1;
+                // }
 
                 if(gp.axes[0] > 0.5) { //left
 
                     joyX = 2;
-                    joyY = 0;
+                    //joyY = 0;
                 }
                 else if(gp.axes[0] < -0.5) { //right
                     
                     joyX = 4;
-                    joyY = 0;
+                    //joyY = 0;
                 }
                 else if(gp.axes[1] > 0.5) { //down
 
-                    joyX = 0;
+                    //joyX = 0;
                     joyY = 3;
                 }
                 else if(gp.axes[1] < -0.5) { //up
 
-                    joyX = 0;
+                    //joyX = 0;
                     joyY = 1;
                 }
                 else { //none
-
+                
                     joyX = 0;
                     joyY = 0;
                 }
 
                 joyMovement(joyX, joyY);
+                // if(gp.axes[0] < -0.59 && gp.axes[0] < 0.28){ // up
 
-                //console.log(gp.axes[0]);   
+                //     joyX = 0;
+                //     joyY = 1;
+                // }
+                // if(gp.axes[0] < -0.59 && gp.axes[0] < 0.28){ // up
+
+                //     joyX = 0;
+                //     joyY = 1;
+                // }
+
+                //console.log(gp.axes[0]);
+
+                
             }
 
             
