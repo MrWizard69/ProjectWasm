@@ -1,5 +1,4 @@
-	
-	let  VirtualJoystick = function(opt){
+let  VirtualJoystick = function(opt){
 		
 			let opts			= opt			|| {};
 			this._container		= opts.container	|| document.body;

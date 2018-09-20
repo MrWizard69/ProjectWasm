@@ -56,46 +56,44 @@
         }
 
         function controllerLoop() {
-            var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
+            let gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
             if (!gamepads) {
               return;
             }
           
-            var gp = gamepads[controllerIndex];
+            let gp = gamepads[controllerIndex];
 
             if(gp && gp.axes[0]){
 
-                if(gp.axes[0] < 0.08){ // stand still
-
-                    joyX = 0;
-                    joyY = 0;
-                }
-                if(gp.axes[0] === -1){ // left
-
-                    joyX = 4;
-                    joyY = 0;
-                }
-                if(gp.axes[0] === 1){ // right
+                if(gp.axes[0] > 0.5) { //left
 
                     joyX = 2;
                     joyY = 0;
                 }
+                else if(gp.axes[0] < -0.5) { //right
+                    
+                    joyX = 4;
+                    joyY = 0;
+                }
+                else if(gp.axes[1] > 0.5) { //down
+
+                    joyX = 0;
+                    joyY = 3;
+                }
+                else if(gp.axes[1] < -0.5) { //up
+
+                    joyX = 0;
+                    joyY = 1;
+                }
+                else { //none
+
+                    joyX = 0;
+                    joyY = 0;
+                }
 
                 joyMovement(joyX, joyY);
-                // if(gp.axes[0] < -0.59 && gp.axes[0] < 0.28){ // up
 
-                //     joyX = 0;
-                //     joyY = 1;
-                // }
-                // if(gp.axes[0] < -0.59 && gp.axes[0] < 0.28){ // up
-
-                //     joyX = 0;
-                //     joyY = 1;
-                // }
-
-                //console.log(gp.axes[0]);
-
-                
+                //console.log(gp.axes[0]);   
             }
 
             

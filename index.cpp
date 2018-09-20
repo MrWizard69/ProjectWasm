@@ -313,6 +313,13 @@ extern "C" { // this is for running functions from JavaScript
         return 1;
     }
 
+    float calc_delta(float stick, float base){
+
+        float delta = stick - base;
+
+        return delta;
+    }
+
 }
 
 void create_window(){ //this is used to create the window
