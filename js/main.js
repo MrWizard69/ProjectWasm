@@ -22,14 +22,12 @@
 
         initialize(); // this is the function that will look at the browser window size and will resize everything
 
-
         let interval;
 
         function isControllerConntected(){
 
             if (!('ongamepadconnected' in window)) {
 
-                
                 interval = setInterval(pollGamepads, 500);
             }
         }
@@ -38,7 +36,6 @@
         
         function pollGamepads() {
             let gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
-            //console.log(gamepads);
             for (let i = 0; i < gamepads.length; i++) {
 
                 let gp = gamepads[i];
@@ -49,8 +46,6 @@
                     controllerIndex = gp.index;
                     controllerLoop();
                     clearInterval(interval);
-                    //isControllerConntected();
-                
                 }
             }
         }
@@ -58,103 +53,136 @@
         function controllerLoop() {
             let gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
             if (!gamepads) {
-              return;
+
+                return;
             }
           
             let gp = gamepads[controllerIndex];
-            let dirX = 'none';
-            let dirY = 'none';
 
+            //controller left joystick layout
             if(gp && gp.axes[0]){
 
-                // if(gp.axes[0] < 0.077){ // stand still //0.08
-
-                //     joyX = 0;
-                //     joyY = 0;
-                //     dirX = 'none';
-                //     dirY = 'none';
-                // }
-                // if(gp.axes[0] <= -0.5 || gp.axes[0] === -1){ // left
-
-                //     joyX = 4;
-                //     joyY = 0;
-                //     dirX = 'left';
-                //     dirY = 'none';
-                // }
-                // if(gp.axes[0] >= 0.5 || gp.axes[0] === 1){ // right
-
-                //     joyX = 2;
-                //     joyY = 0;
-                //     dirX = 'right';
-                //     dirY = 'none';
-                // }
-                // if(gp.axes[0] < -0.3  && dirX != 'left' || gp.axes[0] >= 0.3 && dirX != 'right' ){ // up
-
-                //     joyX = 0;
-                //     joyY = 1;
-                // }
-
-                if(gp.axes[0] > 0.5) { //left
+                if(gp.axes[0] > 0.5 && gp.axes[1] > 0.5) { //left/down
 
                     joyX = 2;
-                    //joyY = 0;
+                }
+                else if(gp.axes[0] < -0.5 && gp.axes[1] > 0.5) { //right/down
+                    
+                    joyX = 4;
+                }
+                else if(gp.axes[0] < -0.5 && gp.axes[1] < -0.5) { //right/up
+                    
+                    joyX = 4;
+                }
+                else if(gp.axes[0] > 0.5 && gp.axes[1] < -0.5) { //left/up
+
+                    joyX = 2;
+                }
+                else if(gp.axes[0] > 0.5) { //left
+
+                    joyX = 2;
+                    joyY = 0;
                 }
                 else if(gp.axes[0] < -0.5) { //right
                     
                     joyX = 4;
-                    //joyY = 0;
+                    joyY = 0;
                 }
                 else if(gp.axes[1] > 0.5) { //down
 
-                    //joyX = 0;
+                    joyX = 0;
                     joyY = 3;
                 }
                 else if(gp.axes[1] < -0.5) { //up
 
-                    //joyX = 0;
+                    joyX = 0;
                     joyY = 1;
                 }
-                else { //none
+                else { //stop moving
                 
                     joyX = 0;
                     joyY = 0;
                 }
 
                 joyMovement(joyX, joyY);
-                // if(gp.axes[0] < -0.59 && gp.axes[0] < 0.28){ // up
 
-                //     joyX = 0;
-                //     joyY = 1;
-                // }
-                // if(gp.axes[0] < -0.59 && gp.axes[0] < 0.28){ // up
+                //controller button layout
+                if(gp.buttons[0].pressed === true){ // A button
 
-                //     joyX = 0;
-                //     joyY = 1;
-                // }
+                    console.log('button 0 pressed');
+                }
+                if(gp.buttons[1].pressed === true){ // B button
 
-                //console.log(gp.axes[0]);
+                    console.log('button 1 pressed');
+                }
+                if(gp.buttons[2].pressed === true){ // X button
 
+                    console.log('button 2 pressed');
+                }
+                if(gp.buttons[3].pressed === true){ // Y button
+
+                    console.log('button 3 pressed');
+                }
+                if(gp.buttons[4].pressed === true){ // left bumper
+
+                    console.log('button 4 pressed');
+                }
+                if(gp.buttons[5].pressed === true){ // right bumper
+
+                    console.log('button 5 pressed');
+                }
+                if(gp.buttons[6].pressed === true){ // left trigger
+
+                    console.log('button 6 pressed');
+                }
+                if(gp.buttons[7].pressed === true){ // right trigger
+
+                    console.log('button 7 pressed');
+                }
+                if(gp.buttons[8].pressed === true){ // option button
+
+                    console.log('button 8 pressed');
+                }
+                if(gp.buttons[9].pressed === true){ // start button
+
+                    console.log('button 9 pressed');
+                }
+                if(gp.buttons[10].pressed === true){ // click left joystick
+
+                    console.log('button 10 pressed');
+                }
+                if(gp.buttons[11].pressed === true){ // click right joystick
+
+                    console.log('button 11 pressed');
+                }
+                if(gp.buttons[12].pressed === true){ // up D-pad
+
+                    console.log('button 12 pressed');
+                }
+                if(gp.buttons[13].pressed === true){ // down D-pad
+
+                    console.log('button 13 pressed');
+                }
+                if(gp.buttons[14].pressed === true){ // left D-pad
+
+                    console.log('button 14 pressed');
+                }
+                if(gp.buttons[15].pressed === true){ // right D-pad
+
+                    console.log('button 15 pressed');
+                }
                 
             }
-
-            
-            // if (buttonPressed(gp.buttons[0])) {
-            //   b--;
-            // } else if (buttonPressed(gp.buttons[2])) {
-            //   b++;
-            // }
-            // if (buttonPressed(gp.buttons[1])) {
-            //   a++;
-            // } else if (buttonPressed(gp.buttons[3])) {
-            //   a--;
-            // }
-          
-            //ball.style.left = a * 2 + "px";
-            //ball.style.top = b * 2 + "px";
           
             start = requestAnimationFrame(controllerLoop);
-          }
 
+            if(gp === null){
+
+                console.log('Your controller got disconnected');
+                window.cancelAnimationFrame(start);
+                isControllerConntected();
+            }
+          }
 
         document.getElementById('joystick').addEventListener('touchend', joystickTapEnd);
 		
@@ -181,7 +209,7 @@
             joyTouch = true; // the joystick was touched and now in the Update function it will be checking the direction of the joystick
         }
 
-        setInterval(function(){ // The math going on in here is hard on the CPU. Look into Dx and Dy values for manual mapping
+        setInterval(function(){
 
             if(joyTouch == true){
 					
@@ -193,113 +221,111 @@
                     if (joystick.right()) {
                             
                         joyDirX = 'right';
-    
                     }
                             
                     if (joystick.left()) {
     
                         joyDirX = 'left';
-    
                     }
                 }
     
-                    if (joystick.down()) {
+                if (joystick.down()) {
     
-                        joyDirY = 'down';
-                        joyDirX = '';
+                    joyDirY = 'down';
+                    joyDirX = '';
                             
-                        if (joystick.right()) {
-    
-                            joyDirX = 'right';
-                        }
-                        if (joystick.left()) {
-                            
-                            joyDirX = 'left';
-                        }
-                    }
-                        
-                        
                     if (joystick.right()) {
     
                         joyDirX = 'right';
-                        joyDirY = '';
-                            
-                        if(joystick.up()){
-                                
-                            joyDirY = 'up';
-                        }
-                        if(joystick.down()){
-                                
-                            joyDirY = 'down';
-                        }
-                            
                     }
                     if (joystick.left()) {
-    
+                            
                         joyDirX = 'left';
-                        joyDirY = '';
-                            
-                        if(joystick.up()){
-                                
-                            joyDirY = 'up';
-                        }
-                        if(joystick.down()){
-                                
-                            joyDirY = 'down';
-                        }
                     }
-                        
-                    if(joyDirX == 'left' && joyDirY == 'up'){ 
-
-                        joyX = 4;
-                        joyY = 1;
-                            
-                    }
-                    else if(joyDirX == 'left' && joyDirY == 'down'){
-
-                        joyX = 4;
-                        joyY = 3;
-                            
-                    }
-                    else if(joyDirY == 'up' && joyDirX == 'right'){
-
-                        joyX = 2;
-                        joyY = 1;
-                            
-                    }
-                    else if(joyDirY == 'down' && joyDirX == 'right'){
-
-                        joyX = 2;
-                        joyY = 3;
-                            
-                    }
-                    else if(joyDirX == 'left'){
-
-                        joyX = 4;
-                        joyY = 0;		
-                            
-                    }
-                    else if(joyDirX == 'right'){
-
-                        joyX = 2;
-                        joyY = 0;											
-                            
-                    }
-                    else if(joyDirY == 'up'){
-
-                        joyX = 0;
-                        joyY = 1;	
-                            
-                    }
-                    else if(joyDirY == 'down'){
-
-                        joyX = 0;
-                        joyY = 3;								
-                            
-                    }
-                    joyMovement(joyX, joyY);
-                
                 }
+                        
+                if (joystick.right()) {
+    
+                    joyDirX = 'right';
+                    joyDirY = '';
+                            
+                    if(joystick.up()){
+                                
+                        joyDirY = 'up';
+                    }
+                    if(joystick.down()){
+                                
+                        joyDirY = 'down';
+                    }
+                            
+                }
+                if (joystick.left()) {
+    
+                    joyDirX = 'left';
+                    joyDirY = '';
+                            
+                    if(joystick.up()){
+                                
+                        joyDirY = 'up';
+                    }
+                    if(joystick.down()){
+                                
+                        joyDirY = 'down';
+                    }
+                }
+                        
+                if(joyDirX == 'left' && joyDirY == 'up'){ 
+
+                    joyX = 4;
+                    joyY = 1;
+                            
+                }
+                else if(joyDirX == 'left' && joyDirY == 'down'){
+
+                    joyX = 4;
+                    joyY = 3;
+                            
+                }
+                else if(joyDirY == 'up' && joyDirX == 'right'){
+
+                    joyX = 2;
+                    joyY = 1;
+                            
+                }
+                else if(joyDirY == 'down' && joyDirX == 'right'){
+
+                    joyX = 2;
+                    joyY = 3;
+                            
+                }
+                else if(joyDirX == 'left'){
+
+                    joyX = 4;
+                    joyY = 0;		
+                            
+                }
+                else if(joyDirX == 'right'){
+
+                    joyX = 2;
+                    joyY = 0;											
+                            
+                }
+                else if(joyDirY == 'up'){
+
+                    joyX = 0;
+                    joyY = 1;	
+                            
+                }
+                else if(joyDirY == 'down'){
+
+                    joyX = 0;
+                    joyY = 3;								
+                            
+                }
+
+                joyMovement(joyX, joyY);
+                
+            }
         }, 120); //120
 
         document.getElementById('openChat').addEventListener('click', tapChat);
