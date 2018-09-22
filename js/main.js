@@ -177,15 +177,12 @@
                 }
             }
             
-          
             start = requestAnimationFrame(controllerLoop);
 
             if(gp === null){
 
                 console.log('Your controller got disconnected');
                 window.cancelAnimationFrame(start);
-                joyX = 0;
-                joyY = 0;
                 joystickTapEnd();
                 isControllerConntected();
             }
