@@ -60,7 +60,7 @@
             let gp = gamepads[controllerIndex];
 
             //controller left joystick layout
-            if(gp && gp.axes[0]){
+            if(gp && gp.axes){
 
                 if(gp.axes[0] > 0.5 && gp.axes[1] > 0.5) { //left/down
 
@@ -103,8 +103,12 @@
                     joyX = 0;
                     joyY = 0;
                 }
-
+                
                 joyMovement(joyX, joyY);
+                
+            }
+
+            if(gp && gp.buttons){
 
                 //controller button layout
                 if(gp.buttons[0].pressed === true){ // A button
@@ -171,8 +175,8 @@
 
                     console.log('button 15 pressed');
                 }
-                
             }
+            
           
             start = requestAnimationFrame(controllerLoop);
 
@@ -180,6 +184,9 @@
 
                 console.log('Your controller got disconnected');
                 window.cancelAnimationFrame(start);
+                joyX = 0;
+                joyY = 0;
+                joystickTapEnd();
                 isControllerConntected();
             }
           }
