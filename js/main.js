@@ -379,8 +379,8 @@
 
         function exitHandler(){
 
-            if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null)
-            {
+            if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null){
+//if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement)// <- use this insead of the silly variable goingFullScreen
                 /* Run code on exit */
                 if(goingFullScreen === false){ // make this work future Jordan!
 
