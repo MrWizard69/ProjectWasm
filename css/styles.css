@@ -27,7 +27,7 @@
 	display: none;
 }
 
-/* #play{
+#play{
 
 	width: 55%;
     height: 3.5em;
@@ -46,7 +46,8 @@
 	border: none;
     display: inline-block;
 	text-transform: uppercase;
-} */
+	display: none;
+}
 
 #dataChannelWrap{
 

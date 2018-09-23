@@ -13,6 +13,7 @@
         let joystick;
         let canvas = document.getElementById('canvas');
         let chatting = false;
+        let goingFullScreen = false;
 
         joyX = -1;
         joyY = -1;
@@ -371,6 +372,29 @@
             }
         }, 120); //120
 
+        document.addEventListener('webkitfullscreenchange', exitHandler, false);
+        document.addEventListener('mozfullscreenchange', exitHandler, false);
+        document.addEventListener('fullscreenchange', exitHandler, false);
+        document.addEventListener('MSFullscreenChange', exitHandler, false);
+
+        function exitHandler(){
+
+            if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null)
+            {
+                /* Run code on exit */
+                if(goingFullScreen === false){ // make this work future Jordan!
+
+                    console.log('exit fullscreen');
+                }
+
+                setTimeout(function(){
+
+                    goingFullScreen = false;
+                }, 500);
+                
+            }
+        }
+
         document.getElementById('openChat').addEventListener('click', tapChat);
 
         function tapChat(){
@@ -399,68 +423,27 @@
 
         function tapPlay(){
 
-            //Module.requestFullscreen(true, false);
-            //document.documentElement.webkitRequestFullScreen();
-            //Module.requestFullscreen(false, false);
+            if (!document.fullscreenElement &&    // alternative standard method
+                !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+                    if (document.documentElement.requestFullscreen) {
+                            document.documentElement.requestFullscreen();
+                            goingFullScreen = true;
+                            Module.requestFullscreen(true, true); //not good for mobile but need it for desktop
+                    } else if (document.documentElement.msRequestFullscreen) {
+                                document.documentElement.msRequestFullscreen();
+                                goingFullScreen = true;
+                                Module.requestFullscreen(true, true); //not good for mobile but need it for desktop
+                    } else if (document.documentElement.mozRequestFullScreen) {
+                                document.documentElement.mozRequestFullScreen();
+                                goingFullScreen = true;
+                                Module.requestFullscreen(true, true); //not good for mobile but need it for desktop
+                    } else if (document.documentElement.webkitRequestFullscreen) {
+                                document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                                goingFullScreen = true;
+                                //Module.requestFullscreen(true, true); //not good for mobile but need it for desktop
+                    }
+            } 
 
-            if (!document.fullscreenElement) {  // current working methods
-                if (document.documentElement.requestFullscreen) {
-                    //document.documentElement.requestFullscreen();
-                }
-                else if (document.documentElement.webkitRequestFullscreen) {
-
-                    document.documentElement.webkitRequestFullScreen();
-                    Module.requestFullscreen(1, 1); // figure out how to full screen future Jordan!
-                } 
-            }
-
-            // setTimeout(() => {
-            //     Module.requestFullscreen(1, 1);
-            // }, 300);
-
-            // setTimeout(() => {
-            //     document.documentElement.webkitRequestFullScreen();
-            //     //Module.requestFullscreen(true, false);
-            //     Module.requestFullscreen(true, false);
-            // }, 200);
-
-            // if (document.webkitExitFullscreen) {
-            //     //console.log('here');
-            //     //document.documentElement.webkitRequestFullScreen();
-                
-            //     //Module.requestFullscreen(1, 1);
-            //     document.documentElement.webkitRequestFullScreen();
-            //     Module.requestFullscreen(1, 1); 
-            //     //Module.requestFullscreen(true, false);
-            //     //document.webkitExitFullscreen();
-            // }
-
-            //Module.requestFullscreen(false, false);
-            //document.documentElement.webkitRequestFullScreen();
-            //Module.requestFullscreen(false, false);
-            //document.documentElement.webkitRequestFullScreen();
-            //document.documentElement.webkitRequestFullScreen();
-            //Module.requestFullscreen(1, 1);
-            //Module.requestFullscreen(1, 1);
-
-            //console.log(window.innerWidth);
-
-            //Module.requestFullscreen(true, false);
-            //Module.requestFullscreen(true, false);
-            //Module.requestFullscreen(1, 1);
-
-            // joystick = new VirtualJoystick({
-            //     container: document.getElementById('joystick'),
-            //     mouseSupport: true,
-            //     limitStickTravel: true,
-            //     stationaryBase: true, // to make the joystick appear anywhere, set to false and comment out BaseX and BaseY
-            //             baseX: joyStickX, // this size is only good for mobile maybe not tablets
-            //             baseY: joyStickY, // this size is only good for mobile maybe not tablets
-            //     stickRadius: 25
-            // });
-            
-
- 
         }
 		
         function initialize() {
@@ -545,15 +528,6 @@
                             document.getElementById('closeChat').style.display = 'inline-block';
                         }
                         //document.getElementById('play').style.display = 'none';
-
-                        // if (document.exitFullscreen) {
-						// 	document.exitFullscreen();
-                        // }
-                        // else if (document.webkitExitFullscreen) {
-                        //     document.webkitExitFullscreen();
-                        // }
-
-                        // Module.exitFullscreen(1, 1);
 
                     }
                     // if(canvas.width >= 350){
