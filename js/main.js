@@ -59,7 +59,7 @@
           
             let gp = gamepads[controllerIndex];
 
-            //controller left joystick layout
+            //controller left joystick layout diagonal
             if(gp && gp.axes){
 
                 if(gp.axes[0] > 0.5 && gp.axes[1] > 0.5) { //left/down
@@ -78,6 +78,24 @@
 
                     joyX = 2;
                 }
+                //controller right joystick layout diagonal
+                else if(gp.axes[2] > 0.5 && gp.axes[3] > 0.5) { //left/down
+
+                    joyX = 2;
+                }
+                else if(gp.axes[2] < -0.5 && gp.axes[3] > 0.5) { //right/down
+                    
+                    joyX = 4;
+                }
+                else if(gp.axes[2] < -0.5 && gp.axes[3] < -0.5) { //right/up
+                    
+                    joyX = 4;
+                }
+                else if(gp.axes[2] > 0.5 && gp.axes[3] < -0.5) { //left/up
+
+                    joyX = 2;
+                }
+                //controller left joystick layout straight
                 else if(gp.axes[0] > 0.5) { //left
 
                     joyX = 2;
@@ -94,6 +112,27 @@
                     joyY = 3;
                 }
                 else if(gp.axes[1] < -0.5) { //up
+
+                    joyX = 0;
+                    joyY = 1;
+                }
+                //controller right stick layout straight
+                else if(gp.axes[2] > 0.5) { //left
+
+                    joyX = 2;
+                    joyY = 0;
+                }
+                else if(gp.axes[2] < -0.5) { //right
+                    
+                    joyX = 4;
+                    joyY = 0;
+                }
+                else if(gp.axes[3] > 0.5) { //down
+
+                    joyX = 0;
+                    joyY = 3;
+                }
+                else if(gp.axes[3] < -0.5) { //up
 
                     joyX = 0;
                     joyY = 1;
