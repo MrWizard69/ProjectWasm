@@ -23,6 +23,10 @@
         <!-- Create the canvas that C++ will draw into -->
         <canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
 
+        <input type="button" id="play" value="Start" />
+    
+        <h1 id="rotation-message">Rotate your Device</h1>
+
     </div>
 
     <!-- Allow C++ to access the canvas element --> 
@@ -31,17 +35,16 @@
             canvas: (function() { return document.getElementById('canvas'); })()
         };
     </script>
-
-    <!-- <input type="button" id="play" value="Start" /> -->
-    <h1 id="rotation-message">Rotate your Device</h1>
+    <!-- <div id="joystick"></div> -->
+    
 
 
     <!--RTC DataChannel START-->
 
-    <input type="button" id="openChat" value="Open Chat" />
-    <input type="button" id="closeChat" value="Close Chat" />
+    <!-- <input type="button" id="openChat" value="Open Chat" />
+    <input type="button" id="closeChat" value="Close Chat" /> -->
 
-    <div id="dataChannelWrap">
+    <!-- <div id="dataChannelWrap">
 
         <div class="controlbox">
             <button id="connectButton" name="connectButton" class="buttonleft">Connect</button>
@@ -60,7 +63,7 @@
             <p>Messages received:</p>
         </div>
 
-    </div>
+    </div> -->
 
     <!--RTC DataChannel END-->
     
@@ -69,7 +72,7 @@
 
     <script src="./js/main.js"></script>
     <script src="./js/VirtualJoystickOpt.js"></script>
-    <script src="./js/dataChannel.js"></script>
+    <!-- <script src="./js/dataChannel.js"></script> -->
 
 </body>
 

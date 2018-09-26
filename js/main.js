@@ -10,10 +10,12 @@
         let joyX = 0;
         let joyY = 0;
         let joyMovement = Module.cwrap('assign_joy', 'number', ['number']);
+        let gameStartQuit = Module.cwrap('start_quit_game', 'number', ['number']);
+        let gameStarted = false;
         let joystick;
         let canvas = document.getElementById('canvas');
-        let chatting = false;
-        let goingFullScreen = false;
+        //let chatting = false;
+        //let goingFullScreen = false;
 
         joyX = -1;
         joyY = -1;
@@ -249,8 +251,12 @@
         document.getElementById('joystick').addEventListener('touchstart', joystickTap);
 		
 		function joystickTap(){
-		
-            joyTouch = true; // the joystick was touched and now in the Update function it will be checking the direction of the joystick
+
+            if(gameStarted == true){
+
+                joyTouch = true; // the joystick was touched and now in the Update function it will be checking the direction of the joystick
+            }
+            
         }
 
         setInterval(function(){
@@ -372,30 +378,7 @@
             }
         }, 120); //120
 
-        document.addEventListener('webkitfullscreenchange', exitHandler, false);
-        document.addEventListener('mozfullscreenchange', exitHandler, false);
-        document.addEventListener('fullscreenchange', exitHandler, false);
-        document.addEventListener('MSFullscreenChange', exitHandler, false);
-
-        function exitHandler(){
-
-            if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null){
-//if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement)// <- use this insead of the silly variable goingFullScreen
-                /* Run code on exit */
-                if(goingFullScreen === false){ // make this work future Jordan!
-
-                    console.log('exit fullscreen');
-                }
-
-                setTimeout(function(){
-
-                    goingFullScreen = false;
-                }, 500);
-                
-            }
-        }
-
-        document.getElementById('openChat').addEventListener('click', tapChat);
+        //document.getElementById('openChat').addEventListener('click', tapChat);
 
         function tapChat(){
 
@@ -407,7 +390,7 @@
             document.getElementById('rotation-message').style.display = 'none';
         }
 
-        document.getElementById('closeChat').addEventListener('click', tapChatClose);
+        //document.getElementById('closeChat').addEventListener('click', tapChatClose);
 
         function tapChatClose(){
 
@@ -419,31 +402,19 @@
             document.getElementById('rotation-message').style.display = 'block';
         }
 
-        //document.getElementById('play').addEventListener('click', tapPlay);
+        document.getElementById('play').addEventListener('click', tapPlay);
 
         function tapPlay(){
 
-            if (!document.fullscreenElement &&    // alternative standard method
-                !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
-                    if (document.documentElement.requestFullscreen) {
-                            document.documentElement.requestFullscreen();
-                            goingFullScreen = true;
-                            Module.requestFullscreen(true, true); //not good for mobile but need it for desktop
-                    } else if (document.documentElement.msRequestFullscreen) {
-                                document.documentElement.msRequestFullscreen();
-                                goingFullScreen = true;
-                                Module.requestFullscreen(true, true); //not good for mobile but need it for desktop
-                    } else if (document.documentElement.mozRequestFullScreen) {
-                                document.documentElement.mozRequestFullScreen();
-                                goingFullScreen = true;
-                                Module.requestFullscreen(true, true); //not good for mobile but need it for desktop
-                    } else if (document.documentElement.webkitRequestFullscreen) {
-                                document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-                                goingFullScreen = true;
-                                //Module.requestFullscreen(true, true); //not good for mobile but need it for desktop
-                    }
-            } 
+            document.getElementById('play').style.display = 'none';
+            gameStarted = true;
+            gameStartQuit(1); // 1-play, 0-quit
+            startTouchControlls();
+        }
 
+        function startTouchControlls(){
+
+            document.getElementById('joystick').style.display = 'block';
         }
 		
         function initialize() {
@@ -468,7 +439,8 @@
 
                 document.getElementById('rotation-message').style.display = 'none';
                 document.getElementById('joystick').style.display = 'none';
-                document.getElementById('openChat').style.display = 'none';
+                document.getElementById('play').style.display = 'none';
+                //document.getElementById('openChat').style.display = 'none';
 
                 setTimeout(function(){
 
@@ -499,35 +471,41 @@
                         
                     // }
                     if(canvas.width >= 350){
-
-                        document.getElementById('joystick').style.display = 'inline-block';
+                        
                         document.getElementById('rotation-message').style.display = 'none';
 
-                        if(chatting == false){
-                            document.getElementById('openChat').style.display = 'none';
-                        }
-                        else{
-                            document.getElementById('closeChat').style.display = 'none';
-                        }
+                        // if(chatting == false){
+                        //     document.getElementById('openChat').style.display = 'none';
+                        // }
+                        // else{
+                        //     document.getElementById('closeChat').style.display = 'none';
+                        // }
                         
-                        
-                        //document.getElementById('play').style.display = 'inline-block';
+                        if(gameStarted == false){
+
+                            document.getElementById('play').style.display = 'inline-block';
+                        }
+                        if(gameStarted == true){
+
+                            document.getElementById('joystick').style.display = 'block';
+                        }
                         
                     }		
                     
                     if(canvas.width <= 300){
                         
                         document.getElementById('joystick').style.display = 'none';
+                        document.getElementById('rotation-message').style.display = 'block';
                         
                         //document.getElementById('openChat').style.display = 'none';
-                        if(chatting == false){
-                            document.getElementById('openChat').style.display = 'inline-block';
-                            document.getElementById('rotation-message').style.display = 'block';
-                        }
-                        else{
-                            document.getElementById('closeChat').style.display = 'inline-block';
-                        }
-                        //document.getElementById('play').style.display = 'none';
+                        // if(chatting == false){
+                        //     document.getElementById('openChat').style.display = 'inline-block';
+                        //     document.getElementById('rotation-message').style.display = 'block';
+                        // }
+                        // else{
+                        //     document.getElementById('closeChat').style.display = 'inline-block';
+                        // }
+                        document.getElementById('play').style.display = 'none';
 
                     }
                     // if(canvas.width >= 350){

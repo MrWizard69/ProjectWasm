@@ -17,8 +17,8 @@
 #canvas {
     border:1px solid #000;
 	border-radius: 5px;
-	margin-left: 13%;
-	/* margin-top: -0.6%; */
+	margin: 0 auto;
+    display: block;
 }
 
 #rotation-message{
