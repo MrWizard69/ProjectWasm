@@ -12,6 +12,7 @@
         let joyMovement = Module.cwrap('assign_joy', 'number', ['number']);
         let gameStartQuit = Module.cwrap('start_quit_game', 'number', ['number']);
         let gameStarted = false;
+        let isGamePaused = false;
         let joystick;
         let canvas = document.getElementById('canvas');
         //let chatting = false;
@@ -21,7 +22,7 @@
         joyY = -1;
         joyMovement(joyX, joyY);
 
-        //document.getElementById('play').style.display = 'none';
+        document.getElementById('title-area').style.display = 'block';
 
         initialize(); // this is the function that will look at the browser window size and will resize everything
 
@@ -407,6 +408,7 @@
         function tapPlay(){
 
             document.getElementById('play').style.display = 'none';
+            document.getElementById('title-area').style.display = 'none';
             gameStarted = true;
             gameStartQuit(1); // 1-play, 0-quit
             startTouchControlls();
@@ -415,6 +417,24 @@
         function startTouchControlls(){
 
             document.getElementById('joystick').style.display = 'block';
+        }
+
+        document.getElementById('gameOptions').addEventListener('click', optionTap);
+
+        function optionTap(){
+
+            document.getElementById('options-backdrop').style.display = 'block';
+            document.getElementById('option-selections').style.display = 'block';
+            isGamePaused = true;
+        }
+
+        document.getElementById('close-opts').addEventListener('click', optionClose);
+
+        function optionClose(){
+
+            document.getElementById('options-backdrop').style.display = 'none';
+            document.getElementById('option-selections').style.display = 'none';
+            isGamePaused = false;
         }
 		
         function initialize() {
@@ -440,6 +460,8 @@
                 document.getElementById('rotation-message').style.display = 'none';
                 document.getElementById('joystick').style.display = 'none';
                 document.getElementById('play').style.display = 'none';
+                document.getElementById('gameOptions').style.display = 'none';
+                document.getElementById('title-area').style.display = 'none';
                 //document.getElementById('openChat').style.display = 'none';
 
                 setTimeout(function(){
@@ -466,13 +488,28 @@
                                 baseY: joyStickY, // this size is only good for mobile maybe not tablets
                         stickRadius: 25
                     });   
-                    // if(canvas.width >= 241){
-                        
-                        
-                    // }
-                    if(canvas.width >= 350){
+                    if(canvas.width >= 600){
+
+                        if(gameStarted == false){
+
+                            document.getElementById('play').style.display = 'inline-block';
+                            document.getElementById('gameOptions').style.display = 'inline-block';
+                            document.getElementById('title-area').style.display = 'block';
+                            document.getElementById('title-area').style.left = '15.5%';
+                            document.getElementById('title-area').style.top = '12%';
+                            document.getElementById('title-area').style.width = '55%';
+                        }
+                        if(gameStarted == true){
+
+                            document.getElementById('joystick').style.display = 'block';
+                        }
+
+                        document.getElementById('close-opts').style.top = '-215%';
+                    }
+                    else if(canvas.width >= 350){
                         
                         document.getElementById('rotation-message').style.display = 'none';
+                        document.getElementById('title-area').style.display = 'none';
 
                         // if(chatting == false){
                         //     document.getElementById('openChat').style.display = 'none';
@@ -484,19 +521,30 @@
                         if(gameStarted == false){
 
                             document.getElementById('play').style.display = 'inline-block';
+                            document.getElementById('gameOptions').style.display = 'inline-block';
                         }
                         if(gameStarted == true){
 
                             document.getElementById('joystick').style.display = 'block';
                         }
+
+                        document.getElementById('close-opts').style.top = '-93%';
                         
                     }		
                     
-                    if(canvas.width <= 300){
+                    else if(canvas.width <= 300){
                         
                         document.getElementById('joystick').style.display = 'none';
                         document.getElementById('rotation-message').style.display = 'block';
-                        
+
+                        if(gameStarted == false){
+
+                            document.getElementById('title-area').style.display = 'block';
+                            document.getElementById('title-area').style.left = '3%';
+                            document.getElementById('title-area').style.top = '33%';
+                            document.getElementById('title-area').style.width = 'auto';
+                        }
+
                         //document.getElementById('openChat').style.display = 'none';
                         // if(chatting == false){
                         //     document.getElementById('openChat').style.display = 'inline-block';
@@ -506,6 +554,7 @@
                         //     document.getElementById('closeChat').style.display = 'inline-block';
                         // }
                         document.getElementById('play').style.display = 'none';
+                        document.getElementById('gameOptions').style.display = 'none';
 
                     }
                     // if(canvas.width >= 350){

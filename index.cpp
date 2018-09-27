@@ -57,7 +57,8 @@ struct canvas_dementions{
 
 struct game_properties{
 
-    bool game_started;
+    bool game_started; //started or quit
+    bool game_paused;
 
 }gameProp_t;
 

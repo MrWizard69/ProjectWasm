@@ -20,12 +20,31 @@
 
         <div id="joystick"></div>
 
+        <input type="button" id="gameOptions" value="Options" />
+
+        <div id="title-area">
+            <h1 id="title">Project WASM</h1>
+            <h2 id="sub-title">Cross Platform Game Engine</h2>
+        </div>
+
         <!-- Create the canvas that C++ will draw into -->
         <canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
 
         <input type="button" id="play" value="Start" />
     
-        <h1 id="rotation-message">Rotate your Device</h1>
+        <h2 id="rotation-message">Rotate your Device to Play</h2>
+
+    </div>
+
+    <div id="options-backdrop"></div>
+
+    <div id="option-selections">
+
+        <input type="button" id="close-opts" class="options" value="X" />
+
+        <input type="button" id="controls" class="options" value="Controls" />
+
+        <input type="button" id="quit-game" class="options" value="Quit Game" />
 
     </div>
 
