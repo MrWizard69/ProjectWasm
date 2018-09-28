@@ -540,7 +540,7 @@
                         if(gameStarted == false){
 
                             document.getElementById('title-area').style.display = 'block';
-                            document.getElementById('title-area').style.left = '10%';
+                            document.getElementById('title-area').style.left = '8%';
                             document.getElementById('title-area').style.top = '33%';
                             document.getElementById('title-area').style.width = 'auto';
                         }
