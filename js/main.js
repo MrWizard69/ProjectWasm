@@ -495,7 +495,7 @@
                             document.getElementById('play').style.display = 'inline-block';
                             document.getElementById('gameOptions').style.display = 'inline-block';
                             document.getElementById('title-area').style.display = 'block';
-                            document.getElementById('title-area').style.left = '15.5%';
+                            document.getElementById('title-area').style.left = '17.5%';
                             document.getElementById('title-area').style.top = '12%';
                             document.getElementById('title-area').style.width = '55%';
                         }
@@ -528,7 +528,7 @@
                             document.getElementById('joystick').style.display = 'block';
                         }
 
-                        document.getElementById('close-opts').style.top = '-80%';
+                        document.getElementById('close-opts').style.top = '-69%';
                         
                     }		
                     
@@ -540,7 +540,7 @@
                         if(gameStarted == false){
 
                             document.getElementById('title-area').style.display = 'block';
-                            document.getElementById('title-area').style.left = '2%';
+                            document.getElementById('title-area').style.left = '5%';
                             document.getElementById('title-area').style.top = '33%';
                             document.getElementById('title-area').style.width = 'auto';
                         }
