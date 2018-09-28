@@ -488,7 +488,7 @@
                                 baseY: joyStickY, // this size is only good for mobile maybe not tablets
                         stickRadius: 25
                     });   
-                    if(canvas.width >= 500){
+                    if(canvas.width >= 600){
 
                         if(gameStarted == false){
 
@@ -540,7 +540,7 @@
                         if(gameStarted == false){
 
                             document.getElementById('title-area').style.display = 'block';
-                            document.getElementById('title-area').style.left = '14%';
+                            document.getElementById('title-area').style.left = '10%';
                             document.getElementById('title-area').style.top = '33%';
                             document.getElementById('title-area').style.width = 'auto';
                         }
