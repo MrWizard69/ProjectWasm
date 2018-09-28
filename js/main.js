@@ -560,7 +560,7 @@
                             document.getElementById('title-area').style.display = 'block';
                             document.getElementById('title-area').style.left = '7.5%';
                             document.getElementById('title-area').style.top = '33%';
-                            document.getElementById('title-area').style.width = 'auto';
+                            document.getElementById('title-area').style.width = '75%';
                         }
 
                         //document.getElementById('openChat').style.display = 'none';
