@@ -487,8 +487,26 @@
                                 baseX: joyStickX, // this size is only good for mobile maybe not tablets
                                 baseY: joyStickY, // this size is only good for mobile maybe not tablets
                         stickRadius: 25
-                    });   
-                    if(canvas.width >= 600){
+                    });
+                    if(canvas.height >= 900){
+
+                        if(gameStarted == false){
+
+                            document.getElementById('play').style.display = 'inline-block';
+                            document.getElementById('gameOptions').style.display = 'inline-block';
+                            document.getElementById('title-area').style.display = 'block';
+                            document.getElementById('title-area').style.left = '17.5%';
+                            document.getElementById('title-area').style.top = '12%';
+                            document.getElementById('title-area').style.width = '55%';
+                        }
+                        if(gameStarted == true){
+
+                            document.getElementById('joystick').style.display = 'block';
+                        }
+
+                        document.getElementById('close-opts').style.top = '-180%';
+                    }
+                    else if(canvas.width >= 600){
 
                         if(gameStarted == false){
 
@@ -540,7 +558,7 @@
                         if(gameStarted == false){
 
                             document.getElementById('title-area').style.display = 'block';
-                            document.getElementById('title-area').style.left = '8%';
+                            document.getElementById('title-area').style.left = '7.5%';
                             document.getElementById('title-area').style.top = '33%';
                             document.getElementById('title-area').style.width = 'auto';
                         }
