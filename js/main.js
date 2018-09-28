@@ -504,7 +504,7 @@
                             document.getElementById('joystick').style.display = 'block';
                         }
 
-                        document.getElementById('close-opts').style.top = '-215%';
+                        document.getElementById('close-opts').style.top = '-180%';
                     }
                     else if(canvas.width >= 350){
                         
@@ -528,7 +528,7 @@
                             document.getElementById('joystick').style.display = 'block';
                         }
 
-                        document.getElementById('close-opts').style.top = '-93%';
+                        document.getElementById('close-opts').style.top = '-80%';
                         
                     }		
                     
@@ -540,7 +540,7 @@
                         if(gameStarted == false){
 
                             document.getElementById('title-area').style.display = 'block';
-                            document.getElementById('title-area').style.left = '3%';
+                            document.getElementById('title-area').style.left = '2%';
                             document.getElementById('title-area').style.top = '33%';
                             document.getElementById('title-area').style.width = 'auto';
                         }
