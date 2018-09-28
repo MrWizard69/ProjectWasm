@@ -488,7 +488,7 @@
                                 baseY: joyStickY, // this size is only good for mobile maybe not tablets
                         stickRadius: 25
                     });   
-                    if(canvas.width >= 600){
+                    if(canvas.width >= 500){
 
                         if(gameStarted == false){
 
