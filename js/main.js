@@ -528,6 +528,7 @@
                         
                         document.getElementById('rotation-message').style.display = 'none';
                         document.getElementById('title-area').style.display = 'none';
+                        document.getElementById('gameOptions').style.display = 'inline-block';
 
                         // if(chatting == false){
                         //     document.getElementById('openChat').style.display = 'none';
@@ -539,7 +540,6 @@
                         if(gameStarted == false){
 
                             document.getElementById('play').style.display = 'inline-block';
-                            document.getElementById('gameOptions').style.display = 'inline-block';
                         }
                         if(gameStarted == true){
 
