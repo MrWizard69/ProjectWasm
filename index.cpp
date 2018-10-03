@@ -350,8 +350,6 @@ void create_window(){ //this is used to create the window
         canvasDem_t.canvas_height,         // height, in pixels
         flags                              //flags, 0
     );
-
-    printf("%d\n", canvasDem_t.canvas_width);
 }
 
 void rebuild_window(){ //this will rebuild the window and apply the new viewport
@@ -381,7 +379,6 @@ void resize_game(int width, int height){ //this will listen for screen size chan
         playerProp_t.player_height = (int)width * .03;
 
         playerProp_t.player_X = (double)width * width_variation;
-        printf("%d\n", canvasDem_t.canvas_width);
         rebuild_window();
         
     }
