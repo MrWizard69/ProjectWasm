@@ -50,6 +50,7 @@
                     ". It has " + gp.buttons.length + " buttons and " + gp.axes.length + " axes.");
                     controllerIndex = gp.index;
                     controllerConnect(1);
+                    document.getElementById('joystick').style.display = 'none';
                     controllerLoop();
                     clearInterval(interval);
                 }
@@ -228,6 +229,7 @@
 
                 console.log('Your controller got disconnected');
                 controllerConnect(0);
+                document.getElementById('joystick').style.display = 'block';
                 window.cancelAnimationFrame(start);
                 joystickTapEnd();
                 isControllerConntected();
