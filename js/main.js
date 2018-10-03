@@ -11,6 +11,7 @@
         let joyY = 0;
         let joyMovement = Module.cwrap('assign_joy', 'number', ['number']);
         let gameStartQuit = Module.cwrap('start_quit_game', 'number', ['number']);
+        let controllerConnect = Module.cwrap('connect_controller', 'number', ['number']);
         let gameStarted = false;
         let isGamePaused = false;
         let joystick;
@@ -48,6 +49,7 @@
                     console.log("Gamepad connected at index " + gp.index + ": " + gp.id +
                     ". It has " + gp.buttons.length + " buttons and " + gp.axes.length + " axes.");
                     controllerIndex = gp.index;
+                    controllerConnect(1);
                     controllerLoop();
                     clearInterval(interval);
                 }
@@ -225,6 +227,7 @@
             if(gp === null){
 
                 console.log('Your controller got disconnected');
+                controllerConnect(0);
                 window.cancelAnimationFrame(start);
                 joystickTapEnd();
                 isControllerConntected();
