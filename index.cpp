@@ -59,6 +59,7 @@ struct game_properties{
 
     bool game_started; //started or quit
     bool game_paused;
+    bool is_controller_conn;
 
 }gameProp_t;
 
@@ -349,6 +350,8 @@ void create_window(){ //this is used to create the window
         canvasDem_t.canvas_height,         // height, in pixels
         flags                              //flags, 0
     );
+
+    printf("%d\n", canvasDem_t.canvas_width);
 }
 
 void rebuild_window(){ //this will rebuild the window and apply the new viewport
@@ -378,7 +381,7 @@ void resize_game(int width, int height){ //this will listen for screen size chan
         playerProp_t.player_height = (int)width * .03;
 
         playerProp_t.player_X = (double)width * width_variation;
-
+        printf("%d\n", canvasDem_t.canvas_width);
         rebuild_window();
         
     }
@@ -424,22 +427,42 @@ void physics_loop(void *arg){ //this is the main loop
 
     //printf("Project Goes Blep Blep!\n");
 
-    int get_new_canvas_width = EM_ASM_INT({
+    if(gameProp_t.is_controller_conn == true){
 
-        var canvasWidth = (window.innerWidth) * .72;//72
-        return canvasWidth;
+        int get_full_canvas_width = EM_ASM_INT({
 
-    });
+            var canvasWidth = (window.innerWidth) * .98;
+            return canvasWidth;
 
-    int get_new_canvas_height = EM_ASM_INT({
+        });
 
-        var canvasHeight = (window.innerHeight) * .90; //80
-        return canvasHeight;
+        int get_full_canvas_height = EM_ASM_INT({
 
-    });
+            var canvasHeight = (window.innerHeight) * .94;
+            return canvasHeight;
 
-    
-    resize_game(get_new_canvas_width, get_new_canvas_height);
+        });
+
+        resize_game(get_full_canvas_width, get_full_canvas_height);
+    }
+    else{
+
+        int get_new_canvas_width = EM_ASM_INT({
+
+            var canvasWidth = (window.innerWidth) * .72;//72
+            return canvasWidth;
+
+        });
+
+        int get_new_canvas_height = EM_ASM_INT({
+
+            var canvasHeight = (window.innerHeight) * .90; //90
+            return canvasHeight;
+
+        });
+
+        resize_game(get_new_canvas_width, get_new_canvas_height);
+    }
     
     // grey background
     SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255);
@@ -461,8 +484,10 @@ int main(){
 
     SDL_GetCurrentDisplayMode(0, &dm);
 
+    gameProp_t.is_controller_conn = false;
+
     canvasDem_t.canvas_width = (int)(dm.w * 0.72);
-    canvasDem_t.canvas_height = (int)(dm.h * 0.80);
+    canvasDem_t.canvas_height = (int)(dm.h * 0.90);
 
     playerProp_t.player_width = (int)(canvasDem_t.canvas_width * 0.03);
     playerProp_t.player_height = (int)(canvasDem_t.canvas_width * 0.03);

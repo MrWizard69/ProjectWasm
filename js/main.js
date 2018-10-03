@@ -477,8 +477,6 @@
                     joyStickX = (window.innerWidth) * .07;
                     joyStickY = (window.innerHeight) * 0.55;
 
-                    canvas.width = (window.innerWidth) * .72;
-
                     joystick = new VirtualJoystick({ // The math going on in here is hard on the CPU. Look into Dx and Dy values for manual mapping
                         container: document.getElementById('joystick'),
                         mouseSupport: true,
@@ -511,7 +509,6 @@
                         if(gameStarted == false){
 
                             document.getElementById('play').style.display = 'inline-block';
-                            document.getElementById('gameOptions').style.display = 'inline-block';
                             document.getElementById('title-area').style.display = 'block';
                             document.getElementById('title-area').style.left = '17.5%';
                             document.getElementById('title-area').style.top = '12%';
@@ -521,7 +518,7 @@
 
                             document.getElementById('joystick').style.display = 'block';
                         }
-
+                        document.getElementById('gameOptions').style.display = 'inline-block';
                         document.getElementById('close-opts').style.top = '-180%';
                     }
                     else if(canvas.width >= 350){
