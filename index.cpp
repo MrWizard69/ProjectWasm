@@ -338,6 +338,20 @@ extern "C" { // this is for running functions from JavaScript
         return game_set;
     }
 
+    int connect_controller(int conn){
+
+        if(conn == 1){
+
+            gameProp_t.is_controller_conn = true;
+        }
+        else{
+
+            gameProp_t.is_controller_conn = false;
+        }
+
+        return conn;
+    }
+
 }
 
 void create_window(){ //this is used to create the window
