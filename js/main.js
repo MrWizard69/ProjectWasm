@@ -469,6 +469,7 @@
                 document.getElementById('play').style.display = 'none';
                 document.getElementById('gameOptions').style.display = 'none';
                 document.getElementById('title-area').style.display = 'none';
+                document.getElementById('options-backdrop').style.display = 'none';
                 //document.getElementById('openChat').style.display = 'none';
 
                 setTimeout(function(){
@@ -525,6 +526,7 @@
 
                             document.getElementById('joystick').style.display = 'block';
                         }
+
                         document.getElementById('gameOptions').style.display = 'inline-block';
                         document.getElementById('close-opts').style.top = '-180%';
                     }
@@ -549,6 +551,10 @@
                         if(gameStarted == true){
 
                             document.getElementById('joystick').style.display = 'block';
+                            document.getElementById('options-backdrop').style.display = 'none';
+                            document.getElementById('rotation-message').style.position = "static";
+                            document.getElementById('rotation-message').style.color = 'black';
+                            document.getElementById('rotation-message').innerHTML = "Rotate Your Device In Landscape To Play";
                         }
 
                         document.getElementById('close-opts').style.top = '-69%';
@@ -567,6 +573,17 @@
                             document.getElementById('title-area').style.left = '7.5%';
                             document.getElementById('title-area').style.top = '33%';
                             document.getElementById('title-area').style.width = '75%';
+                        }
+
+                        if(gameStarted == true){
+
+                            document.getElementById('options-backdrop').style.display = 'block';
+                            document.getElementById('image-rotate').style.zIndex = '2';
+                            document.getElementById('rotation-message').style.position = "absolute";
+                            document.getElementById('rotation-message').style.zIndex = '2';
+                            document.getElementById('rotation-message').style.color = 'white';
+                            document.getElementById('rotation-message').style.left = '8%';
+                            document.getElementById('rotation-message').innerHTML = "Rotate Your Device In Landscape To Continue";
                         }
 
                         //document.getElementById('openChat').style.display = 'none';
