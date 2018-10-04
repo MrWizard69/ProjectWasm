@@ -29,6 +29,18 @@
 	margin-top: auto;
 }
 
+#image-rotate{
+
+	position: absolute;
+    bottom: 34%;
+    left: 25%;
+}
+
+.menu-image{
+
+	position: absolute;
+}
+
 #title-area{
 
 	position: absolute;

@@ -37,6 +37,7 @@
             }
         }
 
+        
         isControllerConntected();
         
         function pollGamepads() {
@@ -463,6 +464,7 @@
             function resizeCanvas() {
 
                 document.getElementById('rotation-message').style.display = 'none';
+                document.getElementById('horizontal-device').style.display = 'none';
                 document.getElementById('joystick').style.display = 'none';
                 document.getElementById('play').style.display = 'none';
                 document.getElementById('gameOptions').style.display = 'none';
@@ -529,6 +531,7 @@
                     else if(canvas.width >= 350){
                         
                         document.getElementById('rotation-message').style.display = 'none';
+                        document.getElementById('horizontal-device').style.display = 'none';
                         document.getElementById('title-area').style.display = 'none';
                         document.getElementById('gameOptions').style.display = 'inline-block';
 
@@ -556,6 +559,7 @@
                         
                         document.getElementById('joystick').style.display = 'none';
                         document.getElementById('rotation-message').style.display = 'block';
+                        document.getElementById('horizontal-device').style.display = 'block';
 
                         if(gameStarted == false){
 
