@@ -520,16 +520,16 @@
                             document.getElementById('rotation-message').style.position = 'absolute';
                             document.getElementById('rotation-message').style.zIndex = '3';
                             document.getElementById('rotation-message').style.color = 'white';
+                            document.getElementById('rotation-message').style.width = '86%';
                             document.getElementById('rotation-message').style.left = '3%';
                             document.getElementById('rotation-message').style.fontSize = '3em';
+                            document.getElementById('rotation-message').style.width = '94%';
                             document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Continue';
                             document.getElementById('image-rotate').style.left = '41%';
                             isGamePaused = true;
-                            console.log('game is paused? ', isGamePaused);
                         }
 
                         document.getElementById('close-opts').style.top = '-180%';
-                        console.log('here over 1k');
                     }
                     else if(canvas.width >= 900 && canvas.height >= 900){ //ipad pro in landscape
 
@@ -544,13 +544,12 @@
                         if(gameStarted == true){
 
                             document.getElementById('joystick').style.display = 'block';
+                            document.getElementById('rotation-message').style.width = '100%';
                             isGamePaused = false;
-                            console.log('game is paused? ', isGamePaused);
                         }
 
                         document.getElementById('gameOptions').style.display = 'inline-block';
                         document.getElementById('close-opts').style.top = '-180%';
-                        console.log('here landscape over 1k');
                     }
                     else if(canvas.height >= 900){ // ipad in portrait
 
@@ -580,9 +579,9 @@
                             document.getElementById('rotation-message').style.left = '7%';
                             document.getElementById('rotation-message').style.fontSize = '2em';
                             document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Continue';
+                            document.getElementById('rotation-message').style.width = '86%';
                             document.getElementById('image-rotate').style.left = '37%';
                             isGamePaused = true;
-                            console.log('game is paused? ', isGamePaused);
                         }
 
                         document.getElementById('close-opts').style.top = '-180%';
@@ -600,8 +599,8 @@
                         if(gameStarted == true){
 
                             document.getElementById('joystick').style.display = 'block';
+                            document.getElementById('rotation-message').style.width = '100%';
                             isGamePaused = false;
-                            console.log('game is paused? ', isGamePaused);
                         }
 
                         document.getElementById('gameOptions').style.display = 'inline-block';
@@ -633,8 +632,8 @@
                             document.getElementById('rotation-message').style.color = 'black';
                             document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Play';
                             document.getElementById('rotation-message').style.fontSize = '1em';
+                            document.getElementById('rotation-message').style.width = '100%';
                             isGamePaused = false;
-                            console.log('game is paused? ', isGamePaused);
                         }
 
                         document.getElementById('close-opts').style.top = '-69%';
@@ -669,8 +668,8 @@
                             document.getElementById('rotation-message').style.left = '7%';
                             document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Continue';
                             document.getElementById('rotation-message').style.fontSize = '1em';
+                            document.getElementById('rotation-message').style.width = '86%';
                             isGamePaused = true;
-                            console.log('game is paused? ', isGamePaused);
                         }
 
                         //document.getElementById('openChat').style.display = 'none';
@@ -710,11 +709,11 @@
                             document.getElementById('rotation-message').style.position = 'absolute';
                             document.getElementById('rotation-message').style.zIndex = '2';
                             document.getElementById('rotation-message').style.color = 'white';
+                            document.getElementById('rotation-message').style.width = '86%';
                             document.getElementById('rotation-message').style.left = '7%';
                             document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Continue';
                             document.getElementById('rotation-message').style.fontSize = '1em';
                             isGamePaused = true;
-                            console.log('game is paused? ', isGamePaused);
                         }
                         document.getElementById('play').style.display = 'none';
                         document.getElementById('gameOptions').style.display = 'none';
