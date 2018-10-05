@@ -506,7 +506,7 @@
                             document.getElementById('title-area').style.top = '12%';
                             document.getElementById('title-area').style.width = '55%';
                             document.getElementById('rotation-message').style.display = 'block';
-                            document.getElementById('rotation-message').style.fontSize = '3em';
+                            document.getElementById('rotation-message').style.fontSize = '2.5em';
                             document.getElementById('horizontal-device').style.display = 'block';
                             document.getElementById('image-rotate').style.left = '41%';
                         }
@@ -522,7 +522,7 @@
                             document.getElementById('rotation-message').style.color = 'white';
                             document.getElementById('rotation-message').style.width = '86%';
                             document.getElementById('rotation-message').style.left = '3%';
-                            document.getElementById('rotation-message').style.fontSize = '3em';
+                            document.getElementById('rotation-message').style.fontSize = '2.5em';
                             document.getElementById('rotation-message').style.width = '94%';
                             document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Continue';
                             document.getElementById('image-rotate').style.left = '41%';
@@ -562,7 +562,7 @@
                             document.getElementById('title-area').style.top = '12%';
                             document.getElementById('title-area').style.width = '55%';
                             document.getElementById('rotation-message').style.display = 'block';
-                            document.getElementById('rotation-message').style.fontSize = '2em';
+                            document.getElementById('rotation-message').style.fontSize = '1.5em';
                             document.getElementById('horizontal-device').style.display = 'block';
                             document.getElementById('image-rotate').style.left = '37%';
                         }
@@ -577,7 +577,7 @@
                             document.getElementById('rotation-message').style.zIndex = '2';
                             document.getElementById('rotation-message').style.color = 'white';
                             document.getElementById('rotation-message').style.left = '7%';
-                            document.getElementById('rotation-message').style.fontSize = '2em';
+                            document.getElementById('rotation-message').style.fontSize = '1.5em';
                             document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Continue';
                             document.getElementById('rotation-message').style.width = '86%';
                             document.getElementById('image-rotate').style.left = '37%';
