@@ -499,7 +499,7 @@
                     if(canvas.height >= 1000){ //ipad pro in portrait
 
                         if(gameStarted == false){
-
+                            
                             document.getElementById('play').style.display = 'none';
                             document.getElementById('gameOptions').style.display = 'none';
                             document.getElementById('title-area').style.display = 'block';
@@ -591,6 +591,7 @@
                             document.getElementById('pause-message').style.left = '39%';
                             document.getElementById('pause-message').style.fontSize = '1.2em';
                             document.getElementById('pause-message').style.width = '60%';
+                            alert('pause thing: left- 37%');
                             isGamePaused = true;
                         }
 
@@ -685,6 +686,7 @@
                             document.getElementById('pause-message').style.left = '31%';
                             document.getElementById('pause-message').style.fontSize = '1em';
                             document.getElementById('pause-message').style.width = '60%';
+                            alert('pause thing: left- 31%');
                             isGamePaused = true;
                         }
 
