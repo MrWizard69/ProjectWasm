@@ -471,6 +471,7 @@
                 document.getElementById('title-area').style.display = 'none';
                 document.getElementById('options-backdrop').style.display = 'none';
                 document.getElementById('option-selections').style.display = 'none';
+                document.getElementById('pause-message').style.display = 'none';
                 //document.getElementById('openChat').style.display = 'none';
 
                 setTimeout(function(){
@@ -526,6 +527,9 @@
                             document.getElementById('rotation-message').style.width = '94%';
                             document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Continue';
                             document.getElementById('image-rotate').style.left = '41%';
+                            document.getElementById('pause-message').style.display = 'block';
+                            document.getElementById('pause-message').style.left = '33%';
+                            document.getElementById('pause-message').style.fontSize = '2.5em';
                             isGamePaused = true;
                         }
 
@@ -545,6 +549,7 @@
 
                             document.getElementById('joystick').style.display = 'block';
                             document.getElementById('rotation-message').style.width = '100%';
+                            document.getElementById('pause-message').style.display = 'none';
                             isGamePaused = false;
                         }
 
@@ -581,6 +586,9 @@
                             document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Continue';
                             document.getElementById('rotation-message').style.width = '86%';
                             document.getElementById('image-rotate').style.left = '37%';
+                            document.getElementById('pause-message').style.display = 'block';
+                            document.getElementById('pause-message').style.left = '36%';
+                            document.getElementById('pause-message').style.fontSize = '1.5em';
                             isGamePaused = true;
                         }
 
@@ -600,6 +608,7 @@
 
                             document.getElementById('joystick').style.display = 'block';
                             document.getElementById('rotation-message').style.width = '100%';
+                            document.getElementById('pause-message').style.display = 'none';
                             isGamePaused = false;
                         }
 
@@ -633,6 +642,7 @@
                             document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Play';
                             document.getElementById('rotation-message').style.fontSize = '1em';
                             document.getElementById('rotation-message').style.width = '100%';
+                            document.getElementById('pause-message').style.display = 'none';
                             isGamePaused = false;
                         }
 
@@ -669,6 +679,9 @@
                             document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Continue';
                             document.getElementById('rotation-message').style.fontSize = '1em';
                             document.getElementById('rotation-message').style.width = '86%';
+                            document.getElementById('pause-message').style.display = 'block';
+                            document.getElementById('pause-message').style.left = '31%';
+                            document.getElementById('pause-message').style.fontSize = '1em';
                             isGamePaused = true;
                         }
 
@@ -713,6 +726,9 @@
                             document.getElementById('rotation-message').style.left = '7%';
                             document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Continue';
                             document.getElementById('rotation-message').style.fontSize = '1em';
+                            document.getElementById('pause-message').style.display = 'block';
+                            document.getElementById('pause-message').style.left = '28%';
+                            document.getElementById('pause-message').style.fontSize = '1em';
                             isGamePaused = true;
                         }
                         document.getElementById('play').style.display = 'none';

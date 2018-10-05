@@ -41,6 +41,17 @@
 	position: absolute;
 }
 
+#pause-message{
+
+	color: white;
+	width: 60%;
+    z-index: 2;
+    position: absolute;
+    top: 30%;
+	left: 31%;
+	display: none;
+}
+
 #title-area{
 
 	position: absolute;
