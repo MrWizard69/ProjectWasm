@@ -528,9 +528,8 @@
                             document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Continue';
                             document.getElementById('image-rotate').style.left = '41%';
                             document.getElementById('pause-message').style.display = 'block';
-                            document.getElementById('pause-message').style.left = '35%';
+                            document.getElementById('pause-message').style.left = '19%';
                             document.getElementById('pause-message').style.width = '60%';
-                            document.getElementById('pause-message').style.fontSize = '2.2em';
                             isGamePaused = true;
                         }
 
@@ -588,10 +587,8 @@
                             document.getElementById('rotation-message').style.width = '86%';
                             document.getElementById('image-rotate').style.left = '37%';
                             document.getElementById('pause-message').style.display = 'block';
-                            document.getElementById('pause-message').style.left = '39%';
-                            document.getElementById('pause-message').style.fontSize = '1.2em';
+                            document.getElementById('pause-message').style.left = '19%';
                             document.getElementById('pause-message').style.width = '60%';
-                            alert('pause thing: left- 37%');
                             isGamePaused = true;
                         }
 
@@ -683,10 +680,8 @@
                             document.getElementById('rotation-message').style.fontSize = '1em';
                             document.getElementById('rotation-message').style.width = '86%';
                             document.getElementById('pause-message').style.display = 'block';
-                            document.getElementById('pause-message').style.left = '31%';
-                            document.getElementById('pause-message').style.fontSize = '1em';
-                            document.getElementById('pause-message').style.width = '60%';
-                            alert('pause thing: left- 31%');
+                            document.getElementById('pause-message').style.left = '10%';
+                            document.getElementById('pause-message').style.width = '80%';
                             isGamePaused = true;
                         }
 
@@ -732,9 +727,8 @@
                             document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Continue';
                             document.getElementById('rotation-message').style.fontSize = '1em';
                             document.getElementById('pause-message').style.display = 'block';
-                            document.getElementById('pause-message').style.left = '26%';
-                            document.getElementById('pause-message').style.fontSize = '1em';
-                            document.getElementById('pause-message').style.width = '60%';
+                            document.getElementById('pause-message').style.left = '5%';
+                            document.getElementById('pause-message').style.width = '89%';
                             isGamePaused = true;
                         }
                         document.getElementById('play').style.display = 'none';
