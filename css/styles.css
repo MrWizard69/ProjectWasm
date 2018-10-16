@@ -14,12 +14,29 @@
     /*--------------This is what activates GPU graphic rendering End------------------*/
 }
 
+#game-wrap{
+
+	display: none;
+}
+
 #canvas {
     border:1px solid #000;
 	border-radius: 5px;
 	margin: 0 auto;
 	display: block;
 	margin-top: 2%;
+}
+
+#load-text{
+
+	text-align: center;
+}
+
+#wasm-error{
+
+	display: none;
+	color: red;
+	text-align: center;
 }
 
 #rotation-message{

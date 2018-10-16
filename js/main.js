@@ -1,5 +1,13 @@
 (function () {
 
+    const supported = typeof WebAssembly === "object";
+
+    if(supported == false){ // this checks if web assembly is supported in the browser
+
+        document.getElementById('wasm-error').style.display = 'block';
+        document.getElementById('load-text').style.display = 'none';
+    }
+
     Module.onRuntimeInitialized = function() {
 
         let joyStickX = 0;
@@ -22,7 +30,8 @@
         joyX = -1;
         joyY = -1;
         joyMovement(joyX, joyY);
-
+        document.getElementById('game-wrap').style.display = 'block'; // when the game is loaded, display the game stage
+        document.getElementById('load-box').style.display = 'none'; // when the game is loaded, hide the load screen
         document.getElementById('title-area').style.display = 'block';
 
         initialize(); // this is the function that will look at the browser window size and will resize everything
@@ -389,7 +398,7 @@
 
         function tapChat(){
 
-            document.getElementById('gameWrap').style.display = 'none';
+            document.getElementById('game-wrap').style.display = 'none';
             document.getElementById('dataChannelWrap').style.display = 'block';
             chatting = true;
             document.getElementById('openChat').style.display = 'none';
@@ -401,7 +410,7 @@
 
         function tapChatClose(){
 
-            document.getElementById('gameWrap').style.display = 'block';
+            document.getElementById('game-wrap').style.display = 'block';
             document.getElementById('dataChannelWrap').style.display = 'none';
             chatting = false;
             document.getElementById('openChat').style.display = 'inline-block';
@@ -594,6 +603,45 @@
 
                         document.getElementById('close-opts').style.top = '-180%';
                     }
+                    // else if(canvas.width < 834 && canvas.height < 1000){ //all other instances...
+
+                    //     if(gameStarted == false){
+                            
+                    //         document.getElementById('play').style.display = 'none';
+                    //         document.getElementById('gameOptions').style.display = 'none';
+                    //         document.getElementById('title-area').style.display = 'block';
+                    //         document.getElementById('title-area').style.left = '17.5%';
+                    //         document.getElementById('title-area').style.top = '12%';
+                    //         document.getElementById('title-area').style.width = '55%';
+                    //         document.getElementById('rotation-message').style.display = 'block';
+                    //         document.getElementById('rotation-message').style.fontSize = '2.2em';
+                    //         document.getElementById('horizontal-device').style.display = 'block';
+                    //         document.getElementById('image-rotate').style.left = '41%';
+                    //     }
+                    //     if(gameStarted == true){
+
+                    //         document.getElementById('joystick').style.display = 'none';
+                    //         document.getElementById('options-backdrop').style.display = 'block';
+                    //         document.getElementById('horizontal-device').style.zIndex = '2';
+                    //         document.getElementById('horizontal-device').style.display = 'block';
+                    //         document.getElementById('rotation-message').style.display = 'block';
+                    //         document.getElementById('rotation-message').style.position = 'absolute';
+                    //         document.getElementById('rotation-message').style.zIndex = '3';
+                    //         document.getElementById('rotation-message').style.color = 'white';
+                    //         document.getElementById('rotation-message').style.width = '86%';
+                    //         document.getElementById('rotation-message').style.left = '3%';
+                    //         document.getElementById('rotation-message').style.fontSize = '2.2em';
+                    //         document.getElementById('rotation-message').style.width = '94%';
+                    //         document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Continue';
+                    //         document.getElementById('image-rotate').style.left = '41%';
+                    //         document.getElementById('pause-message').style.display = 'block';
+                    //         document.getElementById('pause-message').style.left = '19%';
+                    //         document.getElementById('pause-message').style.width = '60%';
+                    //         isGamePaused = true;
+                    //     }
+
+                    //     document.getElementById('close-opts').style.top = '-180%';
+                    // }
                     else if(canvas.width >= 600){ //ipad in landscape
 
                         if(gameStarted == false){
@@ -649,7 +697,6 @@
                         document.getElementById('close-opts').style.top = '-69%';
                         
                     }		
-                    
                     else if(canvas.width >= 250){ // everyother device in portrate
                         
                         document.getElementById('joystick').style.display = 'none';
