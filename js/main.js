@@ -603,45 +603,6 @@
 
                         document.getElementById('close-opts').style.top = '-180%';
                     }
-                    // else if(canvas.width < 834 && canvas.height < 1000){ //all other instances...
-
-                    //     if(gameStarted == false){
-                            
-                    //         document.getElementById('play').style.display = 'none';
-                    //         document.getElementById('gameOptions').style.display = 'none';
-                    //         document.getElementById('title-area').style.display = 'block';
-                    //         document.getElementById('title-area').style.left = '17.5%';
-                    //         document.getElementById('title-area').style.top = '12%';
-                    //         document.getElementById('title-area').style.width = '55%';
-                    //         document.getElementById('rotation-message').style.display = 'block';
-                    //         document.getElementById('rotation-message').style.fontSize = '2.2em';
-                    //         document.getElementById('horizontal-device').style.display = 'block';
-                    //         document.getElementById('image-rotate').style.left = '41%';
-                    //     }
-                    //     if(gameStarted == true){
-
-                    //         document.getElementById('joystick').style.display = 'none';
-                    //         document.getElementById('options-backdrop').style.display = 'block';
-                    //         document.getElementById('horizontal-device').style.zIndex = '2';
-                    //         document.getElementById('horizontal-device').style.display = 'block';
-                    //         document.getElementById('rotation-message').style.display = 'block';
-                    //         document.getElementById('rotation-message').style.position = 'absolute';
-                    //         document.getElementById('rotation-message').style.zIndex = '3';
-                    //         document.getElementById('rotation-message').style.color = 'white';
-                    //         document.getElementById('rotation-message').style.width = '86%';
-                    //         document.getElementById('rotation-message').style.left = '3%';
-                    //         document.getElementById('rotation-message').style.fontSize = '2.2em';
-                    //         document.getElementById('rotation-message').style.width = '94%';
-                    //         document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Continue';
-                    //         document.getElementById('image-rotate').style.left = '41%';
-                    //         document.getElementById('pause-message').style.display = 'block';
-                    //         document.getElementById('pause-message').style.left = '19%';
-                    //         document.getElementById('pause-message').style.width = '60%';
-                    //         isGamePaused = true;
-                    //     }
-
-                    //     document.getElementById('close-opts').style.top = '-180%';
-                    // }
                     else if(canvas.width >= 600){ //ipad in landscape
 
                         if(gameStarted == false){
@@ -663,6 +624,40 @@
                         document.getElementById('gameOptions').style.display = 'inline-block';
                         document.getElementById('close-opts').style.top = '-180%';
                     }
+                    // else if(canvas.width >= 590){ // everyother device in landscape. this guy fixes the sizing issues but not really
+                        
+                    //     document.getElementById('rotation-message').style.display = 'none';
+                    //     document.getElementById('horizontal-device').style.display = 'none';
+                    //     document.getElementById('title-area').style.display = 'none';
+                    //     document.getElementById('gameOptions').style.display = 'inline-block';
+
+                    //     // if(chatting == false){
+                    //     //     document.getElementById('openChat').style.display = 'none';
+                    //     // }
+                    //     // else{
+                    //     //     document.getElementById('closeChat').style.display = 'none';
+                    //     // }
+                        
+                    //     if(gameStarted == false){
+
+                    //         document.getElementById('play').style.display = 'inline-block';
+                    //     }
+                    //     if(gameStarted == true){
+
+                    //         document.getElementById('joystick').style.display = 'block';
+                    //         document.getElementById('options-backdrop').style.display = 'none';
+                    //         document.getElementById('rotation-message').style.position = 'static';
+                    //         document.getElementById('rotation-message').style.color = 'black';
+                    //         document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Play';
+                    //         document.getElementById('rotation-message').style.fontSize = '1em';
+                    //         document.getElementById('rotation-message').style.width = '100%';
+                    //         document.getElementById('pause-message').style.display = 'none';
+                    //         isGamePaused = false;
+                    //     }
+
+                    //     document.getElementById('close-opts').style.top = '-69%';
+                        
+                    // }
                     else if(canvas.width >= 350){ // everyother device in landscape
                         
                         document.getElementById('rotation-message').style.display = 'none';
@@ -696,7 +691,7 @@
 
                         document.getElementById('close-opts').style.top = '-69%';
                         
-                    }		
+                    }				
                     else if(canvas.width >= 250){ // everyother device in portrate
                         
                         document.getElementById('joystick').style.display = 'none';
