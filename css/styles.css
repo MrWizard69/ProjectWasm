@@ -14,6 +14,11 @@
     /*--------------This is what activates GPU graphic rendering End------------------*/
 }
 
+.options-icon{
+
+	content: "\e234";
+}
+
 #game-wrap{
 
 	display: none;
@@ -51,6 +56,7 @@
 	position: absolute;
     bottom: 46%;
 	left: 24%;
+	width: 59%;
 }
 
 .menu-image{

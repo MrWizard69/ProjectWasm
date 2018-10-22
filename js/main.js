@@ -566,6 +566,40 @@
                         document.getElementById('close-opts').style.top = '-133%';
                         
                     }
+                    // else if(canvas.height >= 824 && canvas.height < 931 && canvas.width >= 824 && canvas.width < 931){ // special 'square' cases // width: 824 - 930(1) height: 824 - 930(1)
+                        
+                    //     document.getElementById('rotation-message').style.display = 'none';
+                    //     document.getElementById('horizontal-device').style.display = 'none';
+                    //     document.getElementById('title-area').style.display = 'block';
+                    //     document.getElementById('gameOptions').style.display = 'inline-block';
+
+                    //     // if(chatting == false){
+                    //     //     document.getElementById('openChat').style.display = 'none';
+                    //     // }
+                    //     // else{
+                    //     //     document.getElementById('closeChat').style.display = 'none';
+                    //     // }
+                        
+                    //     if(gameStarted == false){
+
+                    //         document.getElementById('play').style.display = 'inline-block';
+                    //     }
+                    //     if(gameStarted == true){
+
+                    //         document.getElementById('joystick').style.display = 'block';
+                    //         document.getElementById('options-backdrop').style.display = 'none';
+                    //         document.getElementById('rotation-message').style.position = 'static';
+                    //         document.getElementById('rotation-message').style.color = 'black';
+                    //         document.getElementById('rotation-message').innerHTML = 'Rotate Your Device In Landscape To Play';
+                    //         document.getElementById('rotation-message').style.fontSize = '1em';
+                    //         document.getElementById('rotation-message').style.width = '100%';
+                    //         document.getElementById('pause-message').style.display = 'none';
+                    //         isGamePaused = false;
+                    //     }
+                    //     console.log('here');
+                    //     document.getElementById('close-opts').style.top = '-69%';
+                        
+                    // }
                     else if(canvas.width >= 850 && canvas.height >= 850){ //ipad pro in landscape
 
                         if(gameStarted == false){
@@ -586,6 +620,7 @@
 
                         document.getElementById('gameOptions').style.display = 'inline-block';
                         document.getElementById('close-opts').style.top = '-133%';
+                        
                     }
                     else if(canvas.width > 410 && canvas.width < 670 && canvas.height >= 741){ // ipad in portrait / iPhone X / Pixel 2 XL
 
@@ -600,7 +635,7 @@
                             document.getElementById('rotation-message').style.display = 'block';
                             document.getElementById('rotation-message').style.fontSize = '1.2em';
                             document.getElementById('horizontal-device').style.display = 'block';
-                            document.getElementById('image-rotate').style.left = '37%';
+                            document.getElementById('image-rotate').style.left = '36%';
                         }
                         if(gameStarted == true){
 
@@ -624,6 +659,7 @@
                         }
 
                         document.getElementById('close-opts').style.top = '-111%';
+                        //console.log('here');
                     }
                     else if(canvas.width >= 593){ //ipad in landscape / iphone X / Pixel 2 XL
 
@@ -646,7 +682,7 @@
                         document.getElementById('gameOptions').style.display = 'inline-block';
                         document.getElementById('close-opts').style.top = '-111%';
                     }
-                    else if(canvas.width >= 408){ // everyother device in landscape //350 - 408
+                    else if(canvas.width >= 408){ // everyother device in landscape //better for smaller devices ->345 - 408 // 307 <- for iphone and early devices
                         
                         document.getElementById('rotation-message').style.display = 'none';
                         document.getElementById('horizontal-device').style.display = 'none';
@@ -694,6 +730,7 @@
                             document.getElementById('title-area').style.width = '75%';
                             document.getElementById('option-selections').style.display = 'none';
                             document.getElementById('image-rotate').style.left = '24%';
+                            document.getElementById('image-rotate').style.top = '54%';
                             document.getElementById('rotation-message').style.fontSize = '1em';
                         }
 
@@ -737,10 +774,11 @@
 
                             document.getElementById('title-area').style.display = 'block';
                             document.getElementById('title-area').style.left = '7.5%';
-                            document.getElementById('title-area').style.top = '33%';
+                            document.getElementById('title-area').style.top = '15%';
                             document.getElementById('title-area').style.width = '75%';
                             document.getElementById('option-selections').style.display = 'none';
                             document.getElementById('image-rotate').style.left = '19%';
+                            document.getElementById('image-rotate').style.top = '45%';
                             document.getElementById('rotation-message').style.fontSize = '1em';
                         }
 
@@ -749,6 +787,7 @@
                             document.getElementById('options-backdrop').style.display = 'block';
                             document.getElementById('image-rotate').style.zIndex = '2';
                             document.getElementById('image-rotate').style.left = '19%';
+                            document.getElementById('image-rotate').style.top = '45%';
                             document.getElementById('rotation-message').style.position = 'absolute';
                             document.getElementById('rotation-message').style.zIndex = '2';
                             document.getElementById('rotation-message').style.color = 'white';
