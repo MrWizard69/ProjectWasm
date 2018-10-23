@@ -344,7 +344,7 @@ extern "C" { // this is for running functions from JavaScript
 
             gameProp_t.is_controller_conn = true;
         }
-        else{
+        else if(conn == 0){
 
             gameProp_t.is_controller_conn = false;
         }
